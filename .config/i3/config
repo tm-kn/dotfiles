@@ -34,8 +34,12 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-set $terminal gnome-terminal
+set $terminal urxvt
 bindsym $mod+Return exec $terminal
+
+# start a web browser
+set $www firefox
+bindsym $mod+Shift+f exec --no-startup-id $www
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -187,7 +191,7 @@ bindsym $mod+m mode "monitor_select"
 
 set $laptop eDP-1
 set $dp DP-1
-set $dockdp DP-2
+set $dockdp DP-2-1
 
 mode "monitor_select" {
     # only laptop
@@ -246,10 +250,12 @@ mode "power_settings" {
 }
 
 # Bind alternative audio keys
-bindsym ctrl+F10 exec --no-startup-id quodlibet --previous
-bindsym ctrl+F11 exec --no-startup-id quodlibet --play-pause
-bindsym ctrl+F12 exec --no-startup-id quodlibet --next
-
+set $music_previous quodlibet --previous
+set $music_play quodlibet --play-pause
+set $music_next quodlibet --next
+bindsym XF86Search exec --no-startup-id $music_previous
+bindsym XF86LaunchA exec --no-startup-id $music_play
+bindsym XF86Explorer exec --no-startup-id $music_next
 # Start pulseaudio
 exec --no-startup-id start-pulseaudio-x11
 
@@ -269,7 +275,7 @@ exec --no-startup-id thunar --deamon
 exec --no-startup-id transmission-gtk --minimized
 
 # Launch ownCloud
-exec --no-startup-id owncloud
+exec --no-startup-id nextcloud
 
 # Start urxvt daemon
 exec --no-startup-id urxvtd --quiet --opendisplay --fork
