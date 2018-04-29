@@ -41,15 +41,15 @@ bindsym $mod+Return exec $terminal
 set $www firefox
 bindsym $mod+Shift+f exec --no-startup-id $www
 
+# Start a file manager
+set $files thunar
+bindsym $mod+Shift+d exec --no-startup-id $files
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-bindsym $mod+ctrl+space exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -119,22 +119,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-    # These bindings trigger as soon as you enter the resize mode
-
-    # Pressing left will shrink the window’s width.
-    # Pressing right will grow the window’s width.
-    # Pressing up will shrink the window’s height.
-    # Pressing down will grow the window’s height.
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
-
-    # same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -169,10 +157,10 @@ bindsym Shift+$mod+Right move workspace to output right
 bindsym Shift+$mod+Left move workspace to output left
 
 # Audio keys
-bindsym XF86AudioRaiseVolume exec amixer -q sset 'Master' 5%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q sset 'Master' 5%- unmute
-bindsym XF86AudioMute exec amixer -q sset 'Master' toggle
-bindsym XF86AudioMicMute exec amixer -q sset 'Capture' toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Camera key
 bindsym XF86WebCam exec --no-startup-id guvcview
@@ -187,38 +175,38 @@ bindsym --release $mod+Shift+Print exec scrot -u -d 4 $screenshot_filename  -e '
 # Monitor selection
 bindsym XF86Display exec --no-startup-id arandr
 
-bindsym $mod+m mode "monitor_select"
+bindsym $mod+p mode "display"
 
-set $laptop eDP-1
-set $dp DP-1
-set $dockdp DP-2-1
+set $laptop eDP1
+set $dp DP1
+set $dockdp DP2-1
 
-mode "monitor_select" {
+mode "display" {
     # only laptop
-    bindsym 1 exec --no-startup-id xrandr --output $laptop --auto; \
-              exec --no-startup-id xrandr --output $dp --off; \
-              exec --no-startup-id xrandr --output $dockdp --off; \
+    bindsym 1 exec --no-startup-id xrandr --output $laptop --auto \
+                                          --output $dp --off \
+                                          --output $dockdp --off; \
               exec --no-startup-id sleep 1 && $wallpaper_cmd; \
               mode "default"
 
     # Only external monitors
-    bindsym 2 exec --no-startup-id xrandr --output $dp --auto; \
-              exec --no-startup-id xrandr --output $dockdp --auto; \
-              exec --no-startup-id xrandr --output $laptop --off; \
+    bindsym 2 exec --no-startup-id xrandr --output $dp --auto \
+                                          --output $dockdp --auto \
+                                          --output $laptop --off; \
               exec --no-startup-id sleep 1 && $wallpaper_cmd; \
               mode "default"
 
     # Both external monitor and laptop (laptop on the left)
-    bindsym 3 exec --no-startup-id xrandr --output $laptop --auto; \
-              exec --no-startup-id xrandr --output $dp --auto --right-of $laptop; \
-              exec --no-startup-id xrandr --output $dockdp --auto --right-of $laptop; \
+    bindsym 3 exec --no-startup-id xrandr --output $laptop --auto \
+                                          --output $dp --auto --right-of $laptop \
+                                          --output $dockdp --auto --right-of $laptop; \
               exec --no-startup-id sleep 1 && $wallpaper_cmd; \
               mode "default"
 
     # Both external monitor and laptop (laptop on the right)
-    bindsym 4 exec --no-startup-id xrandr --output $laptop --auto; \
-              exec --no-startup-id xrandr --output $dp --auto --left-of $laptop; \
-              exec --no-startup-id xrandr --output $dockdp --auto --left-of $laptop; \
+    bindsym 4 exec --no-startup-id xrandr --output $laptop --auto \
+                                          --output $dp --auto --left-of $laptop  \
+                                          --output $dockdp --auto --left-of $laptop; \
               exec --no-startup-id sleep 1 && $wallpaper_cmd; \
               mode "default"
 
@@ -228,16 +216,16 @@ mode "monitor_select" {
 }
 
 # Brightness keys
-bindsym XF86MonBrightnessDown exec --no-startup-id xrandr --output $laptop --brightness 0.5
-bindsym XF86MonBrightnessUp exec --no-startup-id xrandr --output $laptop --brightness 1
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 
 # Power settings
-bindsym $mod+p mode "power_settings"
+bindsym Shift+$mod+p mode "energy"
 
-set $default_xset xset s off dpms 0 60 0
+set $default_xset xset s off dpms 0 600 0
 exec --no-startup-id $default_xset
 
-mode "power_settings" {
+mode "energy" {
     # Presentation mode
     bindsym p exec --no-startup-id xset s off -dpms; mode "default"
 
@@ -250,12 +238,22 @@ mode "power_settings" {
 }
 
 # Bind alternative audio keys
-set $music_previous quodlibet --previous
-set $music_play quodlibet --play-pause
-set $music_next quodlibet --next
-bindsym XF86Search exec --no-startup-id $music_previous
-bindsym XF86LaunchA exec --no-startup-id $music_play
-bindsym XF86Explorer exec --no-startup-id $music_next
+set $music_player urxvt -e ncmpcpp
+set $music_previous mpc prev
+set $music_play_pause mpc toggle
+set $music_next mpc next
+set $music_stop mpc stop
+
+bindsym XF86Search      exec $music_previous
+bindsym XF86LaunchA     exec $music_play_pause
+bindsym XF86Explorer    exec $music_next
+bindsym $mod+m          exec $music_player
+
+bindsym XF86AudioNext   exec $music_next
+bindsym XF86AudioPlay   exec $music_play_pause
+bindsym XF86AudioPrev   exec $music_previous
+bindsym XF86AudioStop   exec $music_stop
+bindsym XF86AudioMedia  exec $music_player
 # Start pulseaudio
 exec --no-startup-id start-pulseaudio-x11
 
@@ -275,7 +273,10 @@ exec --no-startup-id thunar --deamon
 exec --no-startup-id transmission-gtk --minimized
 
 # Launch ownCloud
-exec --no-startup-id nextcloud
+exec --no-startup-id owncloud
 
 # Start urxvt daemon
 exec --no-startup-id urxvtd --quiet --opendisplay --fork
+
+# Launch Thunderbird
+exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/thunderbird; workspace 1'

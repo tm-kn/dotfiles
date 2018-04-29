@@ -1,22 +1,23 @@
 !! Appearance
-urxvt.termName: rxvt-unicode
-urxvt.scrollBar: false
-urxvt.foreground: black
+urxvt.termName: rxvt-unicode-256color
+urxvt.scrollBar: true
 !! Font prefferenes
-urxvt.font: xft:DejaVu Sans Mono:pixelsize=16
-urxvt.boldFont: xft:DejaVu Sans Mono:pixelsize=13:weight=bold
+urxvt.font: xft:Monospace:pixelsize=16
+urxvt.boldFont: xft:Monospace:pixelsize=13:weight=bold
 urxvt.letterSpace: -1
 !! Larger history limit
 urxvt.saveLines: 1000000
 
+!! Scrolling in pagers
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.secondaryWheel: 1
+
 !! Perl extensions
-urxvt.perl-ext-common: default,matcher,tabbed,font-size
+urxvt.perl-ext-common: default,matcher,tabbed,resize-font
 !! Open urls in browser with Control-Click
 urxvt.url-launcher: firefox
 urxvt.matcher.button: C1
-!! Change font size on Control-Plus/Minus
-URxvt.keysym.C-Up: perl:font-size:increase
-URxvt.keysym.C-Down: perl:font-size:decrease
 
 urxvt.keysym.Home:          \033[1~
 urxvt.keysym.End:           \033[4~
@@ -38,6 +39,7 @@ URxvt.color13: rgb:AD/7F/A8
 URxvt.color14: rgb:34/E2/E2
 URxvt.color15: rgb:EE/EE/EC
 URxvt.colorBD: rgb:ff/ff/ff
+URxvt.colorUL: #4682B4
 
 !! Prevent closing
 URxvt.tabbed.reopen-on-close: yes

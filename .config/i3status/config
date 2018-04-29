@@ -15,7 +15,8 @@ order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "volume master"
-order += "battery all"
+order += "battery 0"
+order += "battery 1"
 order += "load"
 order += "cpu_temperature 0"
 order += "tztime local"
@@ -31,10 +32,18 @@ ethernet _first_ {
         format_down = "E: down"
 }
 
-battery all {
+battery 0 {
         hide_seconds = true
         integer_battery_capacity = true
-        format = "%status %percentage %remaining"
+        last_full_capacity = true
+        format = "0 %status %percentage %remaining"
+}
+
+battery 1 {
+        hide_seconds = true
+        integer_battery_capacity = true
+        last_full_capacity = true
+        format = "1 %status %percentage %remaining"
 }
 
 tztime local {
