@@ -2,7 +2,7 @@
 urxvt256c-ml.scrollBar: true
 !! Font prefferenes
 urxvt256c-ml.font: xft:Monospace:pixelsize=16:antialias=true
-urxvt256c-ml.boldFont: xft:Monospace:style=bold:pixelsize=13:antialias=true
+urxvt256c-ml.boldFont: xft:Monospace:bold:pixelsize=13:antialias=true
 urxvt256c-ml.letterSpace: -1
 !! Larger history limit
 urxvt256c-ml.saveLines: 1000000
