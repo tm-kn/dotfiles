@@ -1,6 +1,10 @@
 " Syntax
 syntax on
 
+" Encoding
+set encoding=utf-8
+set fileencoding=utf-8
+
 " Default backspace behaviour
 set backspace=2
 
@@ -19,16 +23,17 @@ nnoremap <Del> "_d
 nnoremap <Del><Del> "_dd
 vnoremap <Del> "_d
 
+" Open split at the right and bottom
+set splitbelow
+set splitright
+
 " Enable mouse
 set mouse=a
 
 " Bind <Leader> key
 let mapleader=","
 
-" Save command to ctrl+z and <Leader>w
-noremap <C-Z> :up<CR>
-vnoremap <C-Z> <C-C>:up<CR>
-inoremap <C-Z> <C-O>:up<CR>
+" Save command to <Leader>w
 map <Leader>w :up<CR>
 
 " Close buffer
@@ -51,7 +56,7 @@ map <C-K> <C-W>k
 map <C-L> <C-W>l
 
 " Spellcheck
-" set spell spelllang=en_gb
+set spelllang=en_gb
 map <Leader>s :set spell<CR>
 
 " Allow moving to the previous/next line with arrows/H/L
@@ -74,13 +79,16 @@ match ExtraWhitespace /\s\+$/
 " Delete trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
 
+" Compile tex
+map <Leader>c :up<CR>:!pdflatex "%"<CR>
+
 " Line numbers and ruler
 set number
 set tw=79
 set nowrap
 set fo-=t
 set colorcolumn=80
-highlight ColorColumn ctermbg=233
+highlight ColorColumn ctermbg=253 guibg=lightgray
 
 " History
 set history=700
@@ -97,8 +105,15 @@ set shiftwidth=4
 set shiftround
 set expandtab
 
+" Enable spellcheck in text files
+autocmd FileType txt,rst,md,tex setlocal spell
+
 " YAML tabs
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Javascript tabs
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType markdown setlocal formatoptions+=a
 
 " Make search case insensitive
 set hlsearch
@@ -108,9 +123,6 @@ set smartcase
 
 " Disable search highlight
 map <Leader>h :nohl<CR>:set nospell<CR>
-
-" Search mapping
-map <Leader>f /
 
 " Disable backup and swap files
 set nobackup
@@ -141,7 +153,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -155,7 +166,9 @@ Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'majutsushi/tagbar' " apt install ctags
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'rust-lang/rust.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'junegunn/goyo.vim'
+Plugin 'lervag/vimtex'
 
 call vundle#end()
 
@@ -166,7 +179,7 @@ nnoremap <Leader>g :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1 " Close NERDTree when opening a file
 let NERDTreeAutoDeleteBuffer=1 " Close buffer if file has been delted with
-                               " NERDTree
+" NERDTree
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -180,9 +193,9 @@ set wildignore+=*.pyc
 
 " Ctrl to ignore .gitignore
 let g:ctrlp_user_command = [
-    \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
-    \ 'find %s -type f'
-    \ ]
+            \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
+            \ 'find %s -type f'
+            \ ]
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -199,13 +212,19 @@ let g:syntastic_javascript_checkers = ['eslint']
 " Ack/The Silver Searcher
 " Use The Sivler Searcher instead
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+    let g:ackprg = 'ag --vimgrep'
 endif
-
-map <Leader>F :Ack<space>
 
 " Tagbar
 map <Leader>t :TagbarToggle<CR>
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Indent guides
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+" Goyo plugin makes text more readable when writing prose:
+map <F10> :Goyo<CR>
+inoremap <F10> <esc>:Goyo<CR>a
