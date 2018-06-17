@@ -169,6 +169,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'junegunn/goyo.vim'
 Plugin 'lervag/vimtex'
+Plugin 'thinca/vim-fontzoom'
 
 call vundle#end()
 
