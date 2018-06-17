@@ -1,25 +1,25 @@
 !! Appearance
-urxvt256c.scrollBar: true
+urxvt256c-ml.scrollBar: true
 !! Font prefferenes
-urxvt256c.font: xft:Monospace:pixelsize=16:antialias=true
-urxvt256c.boldFont: xft:Monospace:style=bold:pixelsize=13:antialias=true
-urxvt256c.letterSpace: -1
+urxvt256c-ml.font: xft:Monospace:pixelsize=16:antialias=true
+urxvt256c-ml.boldFont: xft:Monospace:style=bold:pixelsize=13:antialias=true
+urxvt256c-ml.letterSpace: -1
 !! Larger history limit
-urxvt256c.saveLines: 1000000
+urxvt256c-ml.saveLines: 1000000
 
 !! Scrolling in pagers
-urxvt256c.secondaryScreen: 1
-urxvt256c.secondaryScroll: 0
-urxvt256c.secondaryWheel: 1
+urxvt256c-ml.secondaryScreen: 1
+urxvt256c-ml.secondaryScroll: 0
+urxvt256c-ml.secondaryWheel: 1
 
 !! Perl extensions
-urxvt256c.perl-ext-common: default,matcher,resize-font
+urxvt256c-ml.perl-ext-common: default,matcher,resize-font
 !! Open urls in browser with Control-Click
-urxvt256c.url-launcher: xdg-open
-urxvt256c.matcher.button: C1
+urxvt256c-ml.url-launcher: xdg-open
+urxvt256c-ml.matcher.button: C1
 
-urxvt256c.keysym.Home:          \033[1~
-urxvt256c.keysym.End:           \033[4~
+urxvt256c-ml.keysym.Home:          \033[1~
+urxvt256c-ml.keysym.End:           \033[4~
 
-urxvt256c.foreground: #2E3436
-urxvt256c.colorUL: #4682B4
+urxvt256c-ml.foreground: #2E3436
+urxvt256c-ml.colorUL: #4682B4
