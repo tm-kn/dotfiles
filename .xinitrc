@@ -7,4 +7,6 @@ export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
+setxkbmap gb
+
 exec i3
