@@ -1,15 +1,11 @@
-# .bashrc
+#
+# ~/.bashrc
+#
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
-# Use vimx as a default editor
-export EDITOR=vimx
-export VISUAL=$EDITOR
-alias vim=vimx
-alias vi=vimx
+alias ls='ls --color=auto'
 
 # Evaluate docker machine settings
 function dme() {

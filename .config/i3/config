@@ -34,7 +34,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-set $terminal urxvt
+set $terminal urxvtc -e tmux new-session -A -s main
 bindsym $mod+Return exec $terminal
 
 # start a web browser
@@ -254,6 +254,10 @@ bindsym XF86AudioPlay   exec $music_play_pause
 bindsym XF86AudioPrev   exec $music_previous
 bindsym XF86AudioStop   exec $music_stop
 bindsym XF86AudioMedia  exec $music_player
+
+# Password manager
+bindsym Shift+$mod+K exec --no-startup-id keepassxc
+
 # Start pulseaudio
 exec --no-startup-id start-pulseaudio-x11
 
@@ -278,5 +282,5 @@ exec --no-startup-id owncloud
 # Start urxvt daemon
 exec --no-startup-id urxvtd --quiet --opendisplay --fork
 
-# Launch Thunderbird
-exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/thunderbird; workspace 1'
+# Start clipboard manager - parcellite
+exec --no-startup-id parcellite
