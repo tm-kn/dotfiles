@@ -150,7 +150,7 @@ bindsym XF86Sleep exec --no-startup-id systemctl suspend
 bindsym XF86Suspend exec --no-startup-id systemctl hibernate
 
 # Lock screen on suspend
-exec --no-startup-id xss-lock sh ~/.config/i3/config/lock.sh
+exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
 # Turn the bell sound off
 exec --no-startup-id xset -b
