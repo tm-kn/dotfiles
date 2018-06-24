@@ -79,9 +79,6 @@ match ExtraWhitespace /\s\+$/
 " Delete trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
 
-" Compile tex
-map <Leader>c :up<CR>:!pdflatex "%"<CR>
-
 " Line numbers and ruler
 set number
 set tw=79
