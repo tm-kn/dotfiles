@@ -11,7 +11,7 @@
 #
 
 set $mod Mod4
-set $movemod Mod1
+set $appmod Mod1
 
 set $wallpaper_cmd ~/.fehbg
 
@@ -43,11 +43,10 @@ bindsym $mod+Return exec --no-startup-id $TERMINAL -e tmux new-session
 bindsym Shift+$mod+Return exec --no-startup-id $TERMINAL
 
 # start a web browser
-bindsym $mod+Shift+f exec --no-startup-id $BROWSER
+bindsym $appmod+f exec --no-startup-id $BROWSER
 
 # Start a file manager
-set $files thunar
-bindsym $mod+Shift+d exec --no-startup-id $files
+bindsym $appmod+d exec --no-startup-id thunar
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -62,16 +61,16 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # move focused window
-bindsym $movemod+h move left
-bindsym $movemod+j move down
-bindsym $movemod+k move up
-bindsym $movemod+l move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+h split h
+bindsym $mod+g split h
 
 # split in vertical orientation
-bindsym $mod+Shift+v split v
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -103,21 +102,23 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $movemod+1 move container to workspace 1
-bindsym $movemod+2 move container to workspace 2
-bindsym $movemod+3 move container to workspace 3
-bindsym $movemod+4 move container to workspace 4
-bindsym $movemod+5 move container to workspace 5
-bindsym $movemod+6 move container to workspace 6
-bindsym $movemod+7 move container to workspace 7
-bindsym $movemod+8 move container to workspace 8
-bindsym $movemod+9 move container to workspace 9
-bindsym $movemod+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -173,8 +174,7 @@ bindsym XF86WebCam exec --no-startup-id guvcview
 set $screenshot_filename 'Screenshot_%s_%H%M_%d.%m.%Y_$wx$h.png'
 bindsym --release Print exec scrot $screenshot_filename  -e 'mv $f ~/Pictures/'
 bindsym --release Shift+Print exec scrot -s $screenshot_filename  -e 'mv $f ~/Pictures/'
-bindsym --release $mod+Shift+Print exec scrot -u -d 4 $screenshot_filename  -e 'mv $f ~/Pictures/'
-
+bindsym --release $mod+Shift+Print exec scrot -u $screenshot_filename  -e 'mv $f ~/Pictures/'
 
 # Monitor selection
 bindsym XF86Display exec --no-startup-id arandr
@@ -225,7 +225,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 
 # Music player
 set     $music_player    $TERMINAL -e tmux new-session -A -s music cmus
-bindsym $mod+m           exec --no-startup-id $music_player
+bindsym $appmod+m           exec --no-startup-id $music_player
 
 # Bind alternative audio keys
 set     $music_previous     cmus-remote --prev
@@ -243,7 +243,7 @@ bindsym XF86AudioPrev   exec $music_previous
 bindsym XF86AudioStop   exec $music_stop
 
 # Password manager
-bindsym Shift+$mod+K exec --no-startup-id keepassxc
+bindsym $appmod+k exec --no-startup-id keepassxc
 
 # Start pulseaudio
 exec --no-startup-id start-pulseaudio-x11
