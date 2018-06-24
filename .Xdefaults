@@ -1,5 +1,6 @@
 !! Appearance
 urxvt*scrollBar: true
+
 !! Font prefferenes
 urxvt*font: xft:Monospace:pixelsize=16:antialias=true
 urxvt*boldFont: xft:Monospace:bold:pixelsize=13:antialias=true
