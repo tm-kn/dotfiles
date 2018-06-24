@@ -36,13 +36,14 @@ floating_modifier $mod
 # Hide window borders
 hide_edge_borders both
 
-# start a terminal
-set $terminal urxvtc -e tmux new-session -A -s main
-bindsym $mod+Return exec $terminal
+# start a tmux session
+bindsym $mod+Return exec --no-startup-id $TERMINAL -e tmux new-session
+
+# start an empty terminal
+bindsym Shift+$mod+Return exec --no-startup-id $TERMINAL
 
 # start a web browser
-set $www firefox
-bindsym $mod+Shift+f exec --no-startup-id $www
+bindsym $mod+Shift+f exec --no-startup-id $BROWSER
 
 # Start a file manager
 set $files thunar
@@ -222,11 +223,15 @@ mode "display" {
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 
+# Music player
+set     $music_player    $TERMINAL -e tmux new-session -A -s music cmus
+bindsym $mod+m           exec --no-startup-id $music_player
+
 # Bind alternative audio keys
-set $music_previous cmus-remote -r
-set $music_play_pause cmus-remote -u
-set $music_next cmus-remote -n
-set $music_stop cmus-remote -s
+set     $music_previous     cmus-remote --prev
+set     $music_play_pause   cmus-remote --pause
+set     $music_next         cmus-remote --next
+set     $music_stop         cmus-remote --stop
 
 bindsym XF86Search      exec $music_previous
 bindsym XF86LaunchA     exec $music_play_pause
