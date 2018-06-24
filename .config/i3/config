@@ -33,6 +33,9 @@ font pango:monospace 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Hide window borders
+hide_edge_borders both
+
 # start a terminal
 set $terminal urxvtc -e tmux new-session -A -s main
 bindsym $mod+Return exec $terminal
