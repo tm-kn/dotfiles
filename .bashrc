@@ -6,6 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
+alias ll='ls -l'
 
 # Evaluate docker machine settings
 function dme() {
