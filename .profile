@@ -1,7 +1,5 @@
-if [ -n "${BASH_VERSION-}" ] ; then
-    if [ -f ~/.bashrc ] ; then
-        . ~/.bashrc
-    fi
+if [ -n "${BASH_VERSION-}" ] && [ -f ~/.bashrc ]; then
+    . ~/.bashrc
 fi
 
 export PATH=$PATH:$HOME/bin
@@ -10,6 +8,6 @@ export VISUAL=$EDITOR
 export BROWSER=firefox
 export TERMINAL=urxvtc
 
-if [ "$(tty)" = "/dev/tty1" ]; then
-    pgrep i3 || startx;exit
+if [ $XDG_VTNR -eq 1 ] && [ ! $DISPLAY ]; then
+    startx;exit
 fi

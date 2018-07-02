@@ -19,35 +19,35 @@ order += "battery 0"
 order += "battery 1"
 order += "load"
 order += "cpu_temperature 0"
+order += "disk /"
+order += "disk /home"
 order += "tztime local"
 
 wireless _first_ {
         format_up = "W: %ip %essid %quality"
-        format_down = "W: down"
 }
 
 ethernet _first_ {
         # if you use %speed, i3status requires root privileges
         format_up = "E: %ip %speed"
-        format_down = "E: down"
 }
 
 battery 0 {
         hide_seconds = true
         integer_battery_capacity = true
         last_full_capacity = true
-        format = "0 %status %percentage %remaining"
+        format = "0: %status %percentage %remaining"
 }
 
 battery 1 {
         hide_seconds = true
         integer_battery_capacity = true
         last_full_capacity = true
-        format = "1 %status %percentage %remaining"
+        format = "1: %status %percentage %remaining"
 }
 
 tztime local {
-        format = "%a %d %b %H:%M:%S"
+        format = "%a %d %b %H:%M"
 }
 
 load {
@@ -60,3 +60,7 @@ volume master {
 }
 
 cpu_temperature 0 {}
+
+disk "/" {}
+
+disk "/home" {}
