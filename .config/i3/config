@@ -35,6 +35,7 @@ floating_modifier $mod
 
 # Hide window borders
 hide_edge_borders both
+for_window [class=".*"] border pixel 0
 
 # start a tmux session
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal -e tmux new-session
@@ -88,6 +89,27 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+
+# Gaps
+bindsym $mod+z mode "inner_gaps"
+
+mode "inner_gaps" {
+    bindsym     plus    gaps inner current plus 5
+    bindsym     minus   gaps inner current minus 5
+    bindsym     0       gaps inner current set 0
+    bindsym     o       mode "outer_gaps"
+    bindsym     Return  mode "default"
+    bindsym     Escape  mode "default"
+}
+
+mode "outer_gaps" {
+    bindsym     plus    gaps outer current plus 5
+    bindsym     minus   gaps outer current minus 5
+    bindsym     0       gaps outer current set 0
+    bindsym     i       mode "inner_gaps"
+    bindsym     Return  mode "default"
+    bindsym     Escape  mode "default"
+}
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -271,3 +293,6 @@ exec --no-startup-id urxvtd --quiet --opendisplay --fork
 
 # Start clipboard manager - parcellite
 exec --no-startup-id parcellite
+
+# Start Telgram
+exec --no-startup-id telegram-desktop
