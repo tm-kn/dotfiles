@@ -187,6 +187,9 @@ set $dp DP1
 set $dockdp DP2-1
 
 mode "display" {
+    # Auto - turn on all display
+    bindsym 0 exec --no-startup-id xrandr --auto; mode "default"
+
     # only laptop
     bindsym 1 exec --no-startup-id xrandr --output $laptop --auto \
                                           --output $dp --off \
