@@ -7,54 +7,44 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
-        interval = 5
+    colors = true
+    interval = 5
 }
 
 order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "volume master"
-order += "battery 0"
-order += "battery 1"
+order += "battery all"
+order += "cpu_usage"
 order += "load"
-order += "cpu_temperature 0"
+order += "cpu_temperature all"
 order += "tztime local"
 
-wireless _first_ {
-        format_up = "W: %ip %essid %quality"
-}
+wireless _first_ {}
 
-ethernet _first_ {
-        # if you use %speed, i3status requires root privileges
-        format_up = "E: %ip %speed"
-}
+ethernet _first_ {}
 
-battery 0 {
-        hide_seconds = true
-        integer_battery_capacity = true
-        last_full_capacity = true
-        format = "0: %status %percentage %remaining"
-}
-
-battery 1 {
-        hide_seconds = true
-        integer_battery_capacity = true
-        last_full_capacity = true
-        format = "1: %status %percentage %remaining"
+battery all {
+    hide_seconds = true
+    integer_battery_capacity = true
+    last_full_capacity = true
 }
 
 tztime local {
-        format = "%a %d %b %H:%M"
+    format = "%a %d %b %H:%M"
 }
 
 load {
-        format = "%1min"
+    format = "Load %1min"
+}
+
+cpu_usage {
+    format = "CPU %usage"
 }
 
 volume master {
-        format = "VOL %volume"
-        format_muted = "MUTE %volume"
+    format_muted = "♪: MUTE %volume"
 }
 
-cpu_temperature 0 {}
+cpu_temperature all {}
