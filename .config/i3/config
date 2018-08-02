@@ -179,9 +179,10 @@ bindsym --release Print exec scrot $screenshot_filename  -e 'mv $f ~/Pictures/'
 bindsym --release Shift+Print exec scrot -s $screenshot_filename  -e 'mv $f ~/Pictures/'
 bindsym --release $mod+Shift+Print exec scrot -u $screenshot_filename  -e 'mv $f ~/Pictures/'
 
-# Monitor selection
-bindsym XF86Display exec --no-startup-id arandr
+# Display button resets the config to the default.
+bindsym XF86Display exec --no-startup-id xrandr --auto
 
+# Enter display mode in order to switch between display configurations.
 bindsym $mod+p mode "display"
 
 set $laptop eDP1
@@ -228,6 +229,14 @@ mode "display" {
 # Brightness keys
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+
+# Toggle touchpad
+bindsym XF86TouchpadToggle   exec --no-startup-id ~/.config/i3/toggle_touchpad.sh
+bindsym $mod+t               exec --no-startup-id ~/.config/i3/toggle_touchpad.sh
+
+# Disable by default
+exec --no-startup-id ~/.config/i3/toggle_touchpad.sh
+
 
 # Music player
 set     $music_player    $TERMINAL -e tmux new-session -A -s music cmus
@@ -277,5 +286,3 @@ exec --no-startup-id urxvtd --quiet --opendisplay --fork
 
 # Start clipboard manager - parcellite
 exec --no-startup-id parcellite
-
-#exec --no-startup-id monitordaemon
