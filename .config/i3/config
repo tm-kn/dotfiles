@@ -286,3 +286,6 @@ exec --no-startup-id urxvtd --quiet --opendisplay --fork
 
 # Start clipboard manager - parcellite
 exec --no-startup-id parcellite
+
+# Start mons
+exec --no-startup-id mons -a
