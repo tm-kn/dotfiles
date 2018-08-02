@@ -179,8 +179,8 @@ bindsym --release Print exec scrot $screenshot_filename  -e 'mv $f ~/Pictures/'
 bindsym --release Shift+Print exec scrot -s $screenshot_filename  -e 'mv $f ~/Pictures/'
 bindsym --release $mod+Shift+Print exec scrot -u $screenshot_filename  -e 'mv $f ~/Pictures/'
 
-# Display button resets the config to the default.
-bindsym XF86Display exec --no-startup-id xrandr --auto
+# Display button resets the config to the mirroring.
+bindsym XF86Display exec --no-startup-id mons -m && sleep 1 && $wallpaper_cmd
 
 # Enter display mode in order to switch between display configurations.
 bindsym $mod+p mode "display"
@@ -190,35 +190,20 @@ set $dp DP1
 set $dockdp DP2-1
 
 mode "display" {
-    # Auto - turn on all display
-    bindsym 0 exec --no-startup-id xrandr --auto; mode "default"
-
     # only laptop
-    bindsym 1 exec --no-startup-id xrandr --output $laptop --auto \
-                                          --output $dp --off \
-                                          --output $dockdp --off; \
-              exec --no-startup-id sleep 1 && $wallpaper_cmd; \
+    bindsym 1 exec --no-startup-id mons -o && sleep 1 && $wallpaper_cmd; \
               mode "default"
 
     # Only external monitors
-    bindsym 2 exec --no-startup-id xrandr --output $dp --auto \
-                                          --output $dockdp --auto \
-                                          --output $laptop --off; \
-              exec --no-startup-id sleep 1 && $wallpaper_cmd; \
+    bindsym 2 exec --no-startup-id mons -s && sleep 1 && $wallpaper_cmd; \
               mode "default"
 
     # Both external monitor and laptop (laptop on the left)
-    bindsym 3 exec --no-startup-id xrandr --output $laptop --auto \
-                                          --output $dp --auto --right-of $laptop \
-                                          --output $dockdp --auto --right-of $laptop; \
-              exec --no-startup-id sleep 1 && $wallpaper_cmd; \
+    bindsym 3 exec --no-startup-id mons -e left &&  sleep 1 && $wallpaper_cmd; \
               mode "default"
 
     # Both external monitor and laptop (laptop on the right)
-    bindsym 4 exec --no-startup-id xrandr --output $laptop --auto \
-                                          --output $dp --auto --left-of $laptop  \
-                                          --output $dockdp --auto --left-of $laptop; \
-              exec --no-startup-id sleep 1 && $wallpaper_cmd; \
+    bindsym 4 exec --no-startup-id mons -e right && sleep 1 && $wallpaper_cmd; \
               mode "default"
 
     # back to normal: Enter or Escape
