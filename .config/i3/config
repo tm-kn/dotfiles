@@ -176,7 +176,7 @@ bindsym --release Shift+Print exec scrot -s $screenshot_filename  -e 'mv $f ~/Pi
 bindsym --release $mod+Shift+Print exec scrot -u $screenshot_filename  -e 'mv $f ~/Pictures/'
 
 # Display button resets the config to the mirroring.
-bindsym XF86Display exec --no-startup-id mons -m && sleep 1 && $wallpaper_cmd
+bindsym XF86Display exec --no-startup-id mons -n right && sleep 1 && $wallpaper_cmd
 
 # Enter display mode in order to switch between display configurations.
 bindsym $mod+p mode "display"
