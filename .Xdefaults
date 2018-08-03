@@ -10,7 +10,7 @@ Xft.hintstyle:  hintfull
 !! Cursor
 urxvt*cursorBlink: true
 
-urxvt*font: xft:NotoSansMono:size=13.5
+urxvt*font: xft:Source Code Pro:pixelsize=24
 !! Larger history limit
 urxvt*saveLines: 1000000
 
