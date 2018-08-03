@@ -43,7 +43,7 @@ noremap <Leader>q :close<CR>
 noremap <Leader>Q :qa<CR>
 
 " Set font for GVIM
-set guifont=Monospace\ 11
+set guifont=NotoSansMono\ 13
 
 " Navigate through tabs
 map <Leader>n :tabprevious<CR>
