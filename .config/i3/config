@@ -46,6 +46,7 @@ bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id  rofi -combi-modi window#drun -show combi ||  dmenu_run
+bindsym $mod+Shift+d exec --no-startup-id dmenu_run
 
 # change focus
 bindsym $mod+h focus left
