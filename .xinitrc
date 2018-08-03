@@ -12,4 +12,8 @@ export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 # Set key repeat rate
 xset r rate 255 100
 
+# Disable screen blanking or screen saver
+xset -dpms
+xset s off
+
 exec i3
