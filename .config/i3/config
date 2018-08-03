@@ -151,6 +151,9 @@ bindsym XF86ScreenSaver exec --no-startup-id sleep 1 && xset dpms force suspend
 bindsym XF86Sleep exec --no-startup-id systemctl suspend
 bindsym XF86Suspend exec --no-startup-id systemctl hibernate
 
+# Pulse audio control
+bindsym XF86Tools exec --no-startup-id pavucontrol
+
 # Lock screen on suspend
 exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
