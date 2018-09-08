@@ -261,7 +261,7 @@ exec_always --no-startup-id $wallpaper_cmd
 exec --no-startup-id thunar --deamon
 
 # Launch Transmission
-exec --no-startup-id transmission-gtk --minimized
+#exec --no-startup-id transmission-gtk --minimized
 
 # Launch ownCloud
 exec --no-startup-id owncloud
@@ -274,3 +274,15 @@ exec --no-startup-id parcellite
 
 # Start mons
 exec --no-startup-id mons -a
+
+# Disable borders for Chromium
+for_window [class="^Chromium$"] border none
+
+# Disable borders for Firefox
+for_window [class="^Firefox$"] border none
+
+# Disable borders for URxvt
+for_window [class="^URxvt$"] border none
+
+# Enable floating for keypassxc
+for_window [class="^keepassxc$"] floating enable
