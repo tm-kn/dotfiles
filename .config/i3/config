@@ -143,6 +143,9 @@ bar {
     status_command i3status
 }
 
+# Set keyboard rate
+exec_always --no-startup-id xset r rate $KEYBOARD_REPEAT_DELAY $KEYBOARD_REPEAT_RATE
+
 # Mod+l to lock the screen
 bindsym ctrl+$mod+l exec --no-startup-id sleep 1 && xset dpms force suspend
 bindsym XF86ScreenSaver exec --no-startup-id sleep 1 && xset dpms force suspend
