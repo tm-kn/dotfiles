@@ -278,6 +278,9 @@ exec --no-startup-id parcellite
 # Start mons
 exec --no-startup-id mons -a
 
+# Disable borders for GVIM
+for_window [class="^Gvim$"] border none
+
 # Disable borders for Chromium
 for_window [class="^Chromium$"] border none
 
