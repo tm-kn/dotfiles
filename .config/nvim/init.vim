@@ -1,5 +1,9 @@
-" Syntax
 syntax on
+
+" Enable full colour support
+if has('nvim')
+    set termguicolors
+endif
 
 " Encoding
 set encoding=utf-8
@@ -31,10 +35,12 @@ set splitright
 set mouse=a
 
 " Bind <Leader> key
-let mapleader=","
+let mapleader = ','
+let maplocalleader = ','
 
 " Save command to <Leader>w
-map <Leader>w :up<CR>
+noremap <Leader>w :update<CR>
+inoremap <C-K> <c-o>:update<CR>
 
 " Close buffer
 noremap <Leader>q :close<CR>
@@ -54,6 +60,10 @@ map <C-H> <C-W>h
 map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
+
+" Allow navigating through soft wrapped lines
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " Spellcheck
 set spelllang=en_gb
@@ -81,9 +91,9 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " Line numbers and ruler
 set number
-set tw=79
+set textwidth=79
 set nowrap
-set fo-=t
+set formatoptions-=t
 set colorcolumn=80
 highlight ColorColumn ctermbg=253 guibg=lightgray
 
@@ -92,7 +102,6 @@ set history=700
 set undolevels=700
 
 " Location
-map <Leader>ll :lopen<CR>
 map <leader>lc :lclose<CR>
 
 " Tabs
@@ -105,12 +114,15 @@ set expandtab
 " Enable spellcheck in text files
 autocmd FileType txt,rst,md,tex setlocal spell
 
+" Enable wrapping in tex
+autocmd FileType tex setlocal linebreak wrap
+
 " YAML tabs
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Javascript tabs
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType markdown setlocal formatoptions+=a
+autocmd FileType tex,markdown setlocal formatoptions+=a
 
 " Make search case insensitive
 set hlsearch
@@ -145,30 +157,27 @@ set scrolloff=10
 " plugins
 "
 
-" vundle
-set rtp+=~/.vim/bundle/Vundle.vim
+" vim-plug
+call plug#begin('~/.local/share/nvim/plugged')
 
-call vundle#begin()
+Plug 'vim-syntastic/syntastic'
+Plug 'vim-airline/vim-airline'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Valloric/YouCompleteMe'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-surround'
+Plug 'majutsushi/tagbar' " apt install ctags
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/goyo.vim'
+Plug 'lervag/vimtex'
+Plug 'thinca/vim-fontzoom'
 
-Plugin 'vim-syntastic/syntastic'
-Plugin 'vim-airline/vim-airline'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'majutsushi/tagbar' " apt install ctags
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'junegunn/goyo.vim'
-Plugin 'lervag/vimtex'
-Plugin 'thinca/vim-fontzoom'
-
-call vundle#end()
+call plug#end()
 
 filetype plugin indent on
 
@@ -190,10 +199,7 @@ let g:ctrlp_max_height=30
 set wildignore+=*.pyc
 
 " Ctrl to ignore .gitignore
-let g:ctrlp_user_command = [
-            \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
-            \ 'find %s -type f'
-            \ ]
+let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f' ]
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -226,3 +232,6 @@ let g:indent_guides_guide_size = 1
 " Goyo plugin makes text more readable when writing prose:
 map <F10> :Goyo<CR>
 inoremap <F10> <esc>:Goyo<CR>a
+
+" vimtex plugin
+let g:vimtex_mappings_enabled = 1

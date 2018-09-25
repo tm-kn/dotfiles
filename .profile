@@ -3,7 +3,7 @@ if [ -n "${BASH_VERSION-}" ] && [ -f ~/.bashrc ]; then
 fi
 
 export PATH=$PATH:$HOME/bin
-export EDITOR=vim
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export BROWSER=chromium
 export TERMINAL=urxvtc
