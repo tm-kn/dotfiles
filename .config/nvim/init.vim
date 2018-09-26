@@ -160,7 +160,7 @@ set scrolloff=10
 " vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'vim-syntastic/syntastic'
+Plug 'neomake/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
@@ -201,17 +201,8 @@ set wildignore+=*.pyc
 " Ctrl to ignore .gitignore
 let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f' ]
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_javascript_checkers = ['eslint']
+" Neomake
+call neomake#configure#automake('nrwi', 500)
 
 " Ack/The Silver Searcher
 " Use The Sivler Searcher instead
