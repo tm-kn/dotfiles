@@ -15,9 +15,10 @@ stty -ixon
 # Infinite history
 HISTSIZE= HISTFILESIZE=
 
-
+# Aliases
 alias ls='ls --color=auto'
 alias ll='ls -l'
+alias grep='grep --color=auto'
 
 # Evaluate docker machine settings
 function dme() {
