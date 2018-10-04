@@ -5,6 +5,17 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Source global definition
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+# Disable ctrl-s and ctrl-q.
+stty -ixon
+
+# Infinite history
+HISTSIZE= HISTFILESIZE=
+
+
 alias ls='ls --color=auto'
 alias ll='ls -l'
 

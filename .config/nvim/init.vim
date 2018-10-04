@@ -40,7 +40,6 @@ let maplocalleader = ','
 
 " Save command to <Leader>w
 noremap <Leader>w :update<CR>
-inoremap <C-K> <c-o>:update<CR>
 
 " Close buffer
 noremap <Leader>q :close<CR>
@@ -122,7 +121,6 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Javascript tabs
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType tex,markdown setlocal formatoptions+=a
 
 " Make search case insensitive
 set hlsearch
@@ -203,6 +201,7 @@ let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-stan
 
 " Neomake
 call neomake#configure#automake('nrwi', 500)
+let g:neomake_python_enabled_makers = ['flake8']
 
 " Ack/The Silver Searcher
 " Use The Sivler Searcher instead
