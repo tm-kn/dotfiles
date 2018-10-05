@@ -4,6 +4,7 @@ syntax on
 if has('nvim')
     set termguicolors
 endif
+set background=dark
 
 " Encoding
 set encoding=utf-8
@@ -166,7 +167,16 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Valloric/YouCompleteMe'
+
+" Deoplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar' " apt install ctags
@@ -212,8 +222,8 @@ endif
 " Tagbar
 map <Leader>t :TagbarToggle<CR>
 
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion = 1
+" Deoplete
+let g:deoplete#enable_at_startup = 1
 
 " Indent guides
 let g:indent_guides_start_level = 2
