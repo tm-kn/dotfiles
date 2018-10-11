@@ -254,8 +254,8 @@ set     $music_next         cmus-remote --next
 set     $music_stop         cmus-remote --stop
 
 bindsym XF86LaunchA     exec $music_play_pause
-bindsym Mod4+47     exec $music_previous
-bindsym Mod4+24    exec $music_next
+bindsym Mod4+semicolon     exec $music_previous
+bindsym Mod4+apostrophe    exec $music_next
 
 bindsym XF86AudioNext   exec $music_next
 bindsym XF86AudioPlay   exec $music_play_pause
