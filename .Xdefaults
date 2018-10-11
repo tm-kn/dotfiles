@@ -10,7 +10,7 @@ Xft.hintstyle:  hintfull
 !! Cursor
 urxvt*cursorBlink: true
 
-urxvt*font: xft:Source Code Pro:pixelsize=24
+urxvt*font: xft:DejaVu Sans Mono:pixelsize=14
 !! Larger history limit
 urxvt*saveLines: 1000000
 
@@ -23,8 +23,7 @@ urxvt*secondaryWheel: 1
 urxvt*perl-ext-common: default,matcher,resize-font
 !! Open urls in browser with Control-Click
 urxvt*url-launcher: xdg-open
-urxvt*matcher.button: C1
-
+urxvt*matcher.button: C1 
 urxvt*keysym.Home:          \033[1~
 urxvt*keysym.End:           \033[4~
 

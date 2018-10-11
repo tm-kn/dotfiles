@@ -4,7 +4,6 @@ syntax on
 if has('nvim')
     set termguicolors
 endif
-set background=dark
 
 " Encoding
 set encoding=utf-8

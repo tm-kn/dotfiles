@@ -17,7 +17,7 @@ set $wallpaper_cmd ~/.fehbg
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Source Code Pro 8
+font pango:DejaVu 7
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -36,17 +36,22 @@ bindsym $mod+Return exec --no-startup-id i3-sensible-terminal -e tmux new-sessio
 bindsym Shift+$mod+Return exec --no-startup-id i3-sensible-terminal
 
 # start a web browser
-bindsym $appmod+f exec --no-startup-id $BROWSER
+bindsym $appmod+f exec $BROWSER
 
-# Start a file manager
-bindsym $appmod+d exec --no-startup-id thunar
+# start a file manager
+bindsym XF86Explorer exec i3-sensible-terminal -e tmux new-session ranger
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id  rofi -combi-modi window#drun -show combi ||  dmenu_run
-bindsym $mod+Shift+d exec --no-startup-id dmenu_run
+# start dmenu
+bindsym $mod+d exec dmenu_run
+
+# start clipmenu
+bindsym $mod+c exec clipmenu
+
+# delete clipmenu entries
+bindsym $mod+Shift+d exec clipdel -d .*
 
 # change focus
 bindsym $mod+h focus left
@@ -178,9 +183,18 @@ bindsym XF86WebCam exec --no-startup-id guvcview
 
 # Screenshot keys
 set $screenshot_filename 'Screenshot_%s_%H%M_%d.%m.%Y_$wx$h.png'
-bindsym --release Print exec scrot $screenshot_filename  -e 'mv $f ~/Pictures/'
-bindsym --release Shift+Print exec scrot -s $screenshot_filename  -e 'mv $f ~/Pictures/'
-bindsym --release $mod+Shift+Print exec scrot -u $screenshot_filename  -e 'mv $f ~/Pictures/'
+
+# Take a screenshot of the whole screen
+bindsym --release Print exec scrot $HOME/Pictures/$screenshot_filename
+bindsym --release Control+Print exec scrot /tmp/$screenshot_filename -e 'xclip -selection c -t image/png < $f'
+
+# Take a screenshot of an area
+bindsym --release Shift+Print exec scrot -s $HOME/Pictures/$screenshot_filename
+bindsym --release Control+Shift+Print exec scrot /tmp/$screenshot_filename -s -e 'xclip -selection c -t image/png < $f'
+
+# Take a screenshot of the current window
+bindsym --release Mod1+Sys_Req exec scrot -u $HOME/Pictures/$screenshot_filename
+bindsym --release Control+Mod1+Sys_Req exec scrot -u /tmp/$screenshot_filename -e 'xclip -selection c -t image/png < $f'
 
 # Display button resets the config to the mirroring.
 bindsym XF86Display exec --no-startup-id mons -n right && sleep 1 && $wallpaper_cmd
@@ -222,13 +236,16 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86TouchpadToggle   exec --no-startup-id ~/.config/i3/toggle_touchpad.sh
 bindsym $mod+t               exec --no-startup-id ~/.config/i3/toggle_touchpad.sh
 
+# Start udiskie daemon - for automounting
+exec --no-startup-id udiskie --tray
+
 # Disable by default
 exec --no-startup-id ~/.config/i3/toggle_touchpad.sh
 
 
 # Music player
 set     $music_player    $TERMINAL -e tmux new-session -A -s music cmus
-bindsym $appmod+m           exec --no-startup-id $music_player
+bindsym $appmod+m           exec $music_player
 
 # Bind music keys
 set     $music_previous     cmus-remote --prev
@@ -236,9 +253,9 @@ set     $music_play_pause   cmus-remote --pause
 set     $music_next         cmus-remote --next
 set     $music_stop         cmus-remote --stop
 
-bindsym XF86Search      exec $music_previous
 bindsym XF86LaunchA     exec $music_play_pause
-bindsym XF86Explorer    exec $music_next
+bindsym Mod4+47     exec $music_previous
+bindsym Mod4+24    exec $music_next
 
 bindsym XF86AudioNext   exec $music_next
 bindsym XF86AudioPlay   exec $music_play_pause
@@ -246,7 +263,7 @@ bindsym XF86AudioPrev   exec $music_previous
 bindsym XF86AudioStop   exec $music_stop
 
 # Password manager
-bindsym $appmod+k exec --no-startup-id keepassxc
+bindsym $appmod+k exec keepassxc
 
 # Start pulseaudio
 exec --no-startup-id start-pulseaudio-x11
@@ -260,29 +277,23 @@ exec --no-startup-id blueman-applet
 # Set the wallpaper
 exec_always --no-startup-id $wallpaper_cmd
 
-# Launch Thunar daemon
-exec --no-startup-id thunar --deamon
-
 # Launch Transmission
-#exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id transmission-gtk --minimized
 
-# Launch ownCloud
-exec --no-startup-id owncloud
+# Launch twmn - notification manager
+exec --no-startup-id twmnd
+
+# Launch Nextcloud
+exec --no-startup-id nextcloud
 
 # Start urxvt daemon
 exec --no-startup-id urxvtd --quiet --opendisplay --fork
 
-# Start clipboard manager - parcellite
-exec --no-startup-id parcellite
+# Start clipboard manager
+exec --no-startup-id clipmenud
 
 # Start mons
 exec --no-startup-id mons -a
-
-# Disable borders for GVIM
-for_window [class="^Gvim$"] border none
-
-# Disable borders for Chromium
-for_window [class="^Chromium$"] border none
 
 # Disable borders for Firefox
 for_window [class="^Firefox$"] border none
