@@ -32,7 +32,7 @@ blueman-applet &
 # Set the wallpaper
 
 # Launch Transmission
-transmission-gtk --minimized &
+#transmission-gtk --minimized &
 
 # Launch twmn - notification manager
 dunst &
@@ -59,7 +59,7 @@ udiskie --tray &
 toggle_touchpad.sh
 
 # Launch Nextcloud
-nextcloud &
+nextcloud > /dev/null 2>&1 &
 
 # Launch Slack
 slack &
