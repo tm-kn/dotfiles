@@ -25,9 +25,9 @@ timediff=$(($now - $old_time))
 velKB=$(echo "1000000000*($value-$old_value)/1024/$timediff" | bc)
 if test "$velKB" -gt 1024
 then
-	echo $(echo "scale=2; $velKB/1024" | bc)MB/s
+	echo $(echo "scale=2; $velKB/1024" | bc)MBps
 else
-	echo ${velKB}KB/s
+	echo ${velKB}KBps
 fi
 }
 
@@ -55,7 +55,7 @@ print_mem(){
 
 print_temp(){
 	test -f /sys/class/thermal/thermal_zone0/temp || return 0
-	echo $(head -c 2 /sys/class/thermal/thermal_zone0/temp)C
+	echo $(head -c 2 /sys/class/thermal/thermal_zone0/temp)°C
 }
 
 print_bat(){
@@ -70,12 +70,12 @@ print_bat(){
 	then
         if test $low = true
         then
-            echo -e "${charge}%(!! LOW BATTERY !!) "
+            echo -e "!! LOW BATTERY !! ${charge}% "
         else
-            echo -e "${charge}%(BAT) "
+            echo -e "BAT ${charge}% "
         fi
 	else
-        echo -e "${charge}%(AC) "
+        echo -e "AC ${charge}% "
 	fi
 }
 

@@ -70,5 +70,4 @@ discord &
 # Launch Evolution
 evolution &
 
-cd ~/.suckless/dwm && make
 exec ~/.suckless/dwm/dwm 2> ~/.dwm.log
