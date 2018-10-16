@@ -1,6 +1,6 @@
 #!/bin/bash
-# Screenshot: http://s.natalian.org/2013-08-17/dwm_status.png
-# Network speed stuff stolen from http://linuxclues.blogspot.sg/2009/11/shell-script-show-network-speed.html
+# Mostly borrowed from
+# https://github.com/kaihendry/dotfiles/blob/ec64dd44ab6fdbb69471c64bf48f383702e4aaa5/bin/dwm_status
 
 # This function parses /proc/net/dev file searching for a line containing $interface data.
 # Within that line, the first and ninth numbers after ':' are respectively the received and transmited bytes.
@@ -80,7 +80,7 @@ print_bat(){
 }
 
 print_date(){
-	date "+%a %m-%d %T%:::z"
+	date "+%a %d %b %T%:::z"
 }
 
 while true
