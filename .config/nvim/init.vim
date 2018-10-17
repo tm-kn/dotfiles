@@ -54,12 +54,6 @@ set guifont=Source\ Code\ Pro\ 13
 map <Leader>n :tabprevious<CR>
 map <Leader>m :tabnext<CR>
 
-" Navigate through splits
-map <C-H> <C-W>h
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-map <C-L> <C-W>l
-
 " Allow navigating through soft wrapped lines
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
@@ -211,6 +205,7 @@ let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-stan
 " Neomake
 call neomake#configure#automake('nrwi', 500)
 let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_open_list = 2
 
 " Ack/The Silver Searcher
 " Use The Sivler Searcher instead

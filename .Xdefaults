@@ -23,9 +23,9 @@ urxvt*secondaryWheel: 1
 urxvt*perl-ext-common: default,matcher,resize-font
 !! Open urls in browser with Control-Click
 urxvt*url-launcher: xdg-open
-urxvt*matcher.button: C1 
+urxvt*matcher.button: C1
 urxvt*keysym.Home:          \033[1~
 urxvt*keysym.End:           \033[4~
 
-urxvt*foreground: #2E3436
+urxvt*foreground: #000000
 urxvt*colorUL: #4682B4
