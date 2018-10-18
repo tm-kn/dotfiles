@@ -14,9 +14,6 @@ export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 xset -dpms
 xset s off
 
-# Set keyboard rate
-xset r rate 255 100
-
 # Start pulseaudio
 start-pulseaudio-x11
 

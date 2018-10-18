@@ -5,8 +5,9 @@ fi
 export PATH=$PATH:$HOME/bin
 export EDITOR=nvim
 export VISUAL=$EDITOR
-export BROWSER=firefox
+export BROWSER=chromium
 
 if [ $XDG_VTNR -eq 1 ] && [ ! $DISPLAY ]; then
-    startx;exit
+    # Start x and set the keyboard speed
+    startx -- -ardelay 200 -arinterval 10;exit
 fi
