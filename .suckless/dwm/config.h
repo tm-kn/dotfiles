@@ -1,24 +1,26 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const char *fonts[] = {
-	"monospace:size=10"
-};
-static const char dmenufont[]       = "monospace:size=10";
-static const char normbordercolor[] = "#444444";
-static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#005577";
-static const char selbgcolor[]      = "#005577";
-static const char selfgcolor[]      = "#eeeeee";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, 0: display systray on the last monitor*/
-static const int showsystray        = 1;        /* 0 means no systray */
+static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const char *fonts[]          = { "monospace:size=10" };
+static const char dmenufont[]       = "monospace:size=10";
+static const char col_gray1[]       = "#222222";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
+static const char *colors[][3]      = {
+	/*               fg         bg         border   */
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+};
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -29,10 +31,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Chromium",  NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "keepassxc",  NULL,       NULL,     1 << 5,       0,           -1 },
 	{ "URxvt",  NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Slack",  NULL,       NULL,       1 << 7,       0,           -1 },
-	{ "discord",  NULL,       NULL,       1 << 6,       0,           -1 },
 	{ "Evolution",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
@@ -64,7 +66,7 @@ static const char terminal[] = "urxvtc";
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *kill_xinit[] = { "killall", "xinit", NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *clipmenucmd[] = { "clipmenu", NULL };
 static const char *clipmenudelcmd[] = { "clipdel", "-d", ".*", NULL };
 static const char *termcmd[]  = { terminal, "-e", "tmux", "new-session", NULL };
@@ -72,6 +74,7 @@ static const char *alt_termcmd[]  = { terminal, NULL };
 
 static const char *file_manager[] = { terminal, "-e", "tmux", "new-session", "ranger", NULL };
 static const char *web_browser[] = { "xdg-open", "https://", NULL };
+static const char *password_manager[] = {"keepassxc", NULL };
 
 static const char *dpms_suspend[] = { "xset", "dpms", "force", "suspend", NULL };
 
@@ -146,6 +149,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_Tools, spawn,      {.v = volume_settings } },
 	{ 0,                            XF86XK_Display, spawn,    {.v = switch_monitor } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,         {.v = web_browser} },
+	{ MODKEY|ShiftMask,             XK_k,      spawn,         {.v = password_manager } },
 	{ MODKEY|ShiftMask,             XK_t,      spawn,         {.v = toggle_touchpad} },
 	{ 0,                            XF86XK_Explorer, spawn,   {.v = file_manager } },
 

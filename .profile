@@ -5,7 +5,7 @@ fi
 export PATH=$PATH:$HOME/bin
 export EDITOR=nvim
 export VISUAL=$EDITOR
-export BROWSER=chromium
+export BROWSER=firefox
 
 if [ $XDG_VTNR -eq 1 ] && [ ! $DISPLAY ]; then
     # Start x and set the keyboard speed
