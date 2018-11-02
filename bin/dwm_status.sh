@@ -42,9 +42,9 @@ print_volume() {
     mute="$(pamixer --get-mute)"
 	if test "$mute" = true
 	then
-        echo -e "MUTE ${volume}% "
+        echo -e "MUTE ${volume}%"
     else
-		echo -e "VOL ${volume}% "
+		echo -e "VOL ${volume}%"
 	fi
 }
 
@@ -70,12 +70,12 @@ print_bat(){
 	then
         if test $low = true
         then
-            echo -e "!! LOW BATTERY !! ${charge}% "
+            echo -e "!! LOW BATTERY !! ${charge}%"
         else
-            echo -e "BAT ${charge}% "
+            echo -e "BAT ${charge}%"
         fi
 	else
-        echo -e "AC ${charge}% "
+        echo -e "AC ${charge}%"
 	fi
 }
 
@@ -93,7 +93,7 @@ do
 	vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 	vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-	xsetroot -name "$(print_mem) $vel_recv $vel_trans $(print_temp) $(print_bat)$(print_volume) $(print_date)"
+	xsetroot -name "$(print_mem)|$vel_recv|$vel_trans|$(print_temp)|$(print_bat)|$(print_volume)|$(print_date)"
 
 	# Update old values to perform new calculations
 	old_received_bytes=$received_bytes
