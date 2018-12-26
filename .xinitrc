@@ -34,9 +34,6 @@ blueman-applet &
 # Launch Transmission
 #transmission-gtk --minimized &
 
-# Launch twmn - notification manager
-dunst &
-
 # Start urxvt daemon
 urxvtd --quiet --opendisplay &
 
@@ -61,13 +58,13 @@ toggle_touchpad.sh
 # Launch Nextcloud
 nextcloud > /dev/null 2>&1 &
 
-# Launch Slack
-slack &
-
 # Launch KeePassXC
 keepassxc &
 
 # Launch Evolution
 evolution &
+
+# Launch Telegram
+telegram-desktop &
 
 exec ~/.suckless/dwm/dwm 2> ~/.dwm.log
