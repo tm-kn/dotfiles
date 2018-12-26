@@ -20,6 +20,8 @@ HISTSIZE= HISTFILESIZE=
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias grep='grep --color=auto'
+alias dokku='ssh -t dokku@staging.torchbox.com '
+alias tbxaws="aws --profile tbx "
 
 # Evaluate docker machine settings
 function dme() {
