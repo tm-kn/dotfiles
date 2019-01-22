@@ -5,6 +5,9 @@ if has('nvim')
     set termguicolors
 endif
 
+" Use light background
+set background=light
+
 " Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -114,7 +117,7 @@ autocmd FileType tex setlocal linebreak wrap
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Javascript tabs
-autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
 
 " Make search case insensitive
 set hlsearch
@@ -160,6 +163,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+Plug 'benjie/local-npm-bin.vim'
 
 " Deoplete
 if has('nvim')
@@ -206,6 +211,7 @@ let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-stan
 call neomake#configure#automake('nrwi', 500)
 let g:neomake_python_enabled_makers = ['flake8']
 let g:neomake_open_list = 2
+let g:neomake_javascript_enabled_makers = ['eslint']
 
 " Ack/The Silver Searcher
 " Use The Sivler Searcher instead
