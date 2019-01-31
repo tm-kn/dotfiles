@@ -165,6 +165,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 Plug 'benjie/local-npm-bin.vim'
+Plug 'sbdchd/neoformat'
 
 " Deoplete
 if has('nvim')
