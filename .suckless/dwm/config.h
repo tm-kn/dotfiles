@@ -31,8 +31,6 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Firefox",  NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "URxvt",  NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Slack",  NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "Evolution",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
@@ -95,6 +93,8 @@ static const char *brightness_down[] = { "xbacklight", "-dec", "10", NULL };
 static const char *brightness_up[] = { "xbacklight", "-inc", "10", NULL };
 
 static const char *toggle_touchpad[] = { "toggle_touchpad.sh", NULL };
+static const char *slack_cmd[] = { "slack", NULL };
+static const char *telegram_cmd[] = { "telegram-desktop", NULL };
 
 // Screenshot
 static const char *screenshot_full[] = { "screenshot.sh", NULL };
@@ -145,9 +145,12 @@ static Key keys[] = {
 
     // General
 	{ MODKEY|ShiftMask,             XK_l,      spawn,         {.v = dpms_suspend} },
+	{ 0,                            XF86XK_ScreenSaver, spawn, {.v = dpms_suspend} },
 	{ 0,                            XF86XK_Tools, spawn,      {.v = volume_settings } },
 	{ 0,                            XF86XK_Display, spawn,    {.v = switch_monitor } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,         {.v = web_browser} },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,         {.v = slack_cmd } },
+	{ MODKEY|ShiftMask,             XK_a,      spawn,         {.v = telegram_cmd } },
 	{ MODKEY|ShiftMask,             XK_k,      spawn,         {.v = password_manager } },
 	{ MODKEY|ShiftMask,             XK_t,      spawn,         {.v = toggle_touchpad} },
 	{ 0,                            XF86XK_Explorer, spawn,   {.v = file_manager } },
