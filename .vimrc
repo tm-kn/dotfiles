@@ -63,7 +63,9 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " Spellcheck
 set spelllang=en_gb
+set spell
 map <Leader>s :set spell<CR>
+map <Leader>ss :set nospell<CR>
 
 " Allow moving to the previous/next line with arrows/H/L
 set whichwrap+=<,>,h,l,[,]
@@ -126,7 +128,7 @@ set ignorecase
 set smartcase
 
 " Disable search highlight
-map <Leader>h :nohl<CR>:set nospell<CR>
+map <Leader>h :nohl<CR>
 
 " Disable backup and swap files
 set nobackup
@@ -163,22 +165,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 Plug 'benjie/local-npm-bin.vim'
 Plug 'sbdchd/neoformat'
-
-" Deoplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'valloric/youcompleteme'
 
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
-Plug 'majutsushi/tagbar' " apt install ctags
+Plug 'majutsushi/tagbar'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/goyo.vim'
 Plug 'lervag/vimtex'
@@ -189,8 +182,8 @@ call plug#end()
 filetype plugin indent on
 
 " NERDTree
-nnoremap <Leader>g :NERDTreeToggle<Enter>
-nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+nnoremap <Leader>v :NERDTreeToggle<Enter>
+nnoremap <Leader>vv :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1 " Close NERDTree when opening a file
 let NERDTreeAutoDeleteBuffer=1 " Close buffer if file has been delted with
 " NERDTree
@@ -200,6 +193,7 @@ let NERDTreeDirArrows = 1
 
 " airline
 set laststatus=2
+
 
 " Ctrlp
 let g:ctrlp_max_height=30
@@ -223,12 +217,9 @@ endif
 " Tagbar
 map <Leader>t :TagbarToggle<CR>
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-
 " Indent guides
 let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+let g:indent_guides_guide_size = 0
 
 " Goyo plugin makes text more readable when writing prose:
 map <F10> :Goyo<CR>
