@@ -43,14 +43,14 @@ clipmenud &
 # Start mons
 mons -a &
 
-# Lock screen on DPMS/suspend etc.
-xss-lock -- xset dpms force suspend && slock
-
 # Turn the bell sound off
 xset -b
 
 # Launch udiskie - auto mount of removable drives
 udiskie --tray &
+
+# start riot
+riot-desktop --hidden &
 
 # Disable touchpad
 toggle_touchpad.sh
@@ -65,7 +65,7 @@ keepassxc &
 evolution &
 
 # Launch Telegram
-telegram-desktop -startintray &
+telegram-desktop &
 
 # Start DWM
 exec dwm 2> ~/.dwm.log

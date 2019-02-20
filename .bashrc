@@ -35,8 +35,5 @@ function dme() {
     eval $(docker-machine env)
 }
 
-# Custom PS1
-export PS1='\[\033[1;100m\]\W $\[\033[0m\] '
-
 # Vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox

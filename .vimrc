@@ -6,7 +6,7 @@ if has('nvim')
 endif
 
 " Use light background
-set background=light
+set background=dark
 
 " Encoding
 set encoding=utf-8
