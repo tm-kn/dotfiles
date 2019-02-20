@@ -153,7 +153,7 @@ set scrolloff=10
 "
 
 " vim-plug
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 Plug 'neomake/neomake'
 Plug 'vim-airline/vim-airline'

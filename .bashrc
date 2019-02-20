@@ -20,7 +20,14 @@ HISTSIZE= HISTFILESIZE=
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias grep='grep --color=auto'
-alias dokku='ssh -t dokku@staging.torchbox.com '
+
+# pwman
+tbxpw(){
+    ssh -t tomaszk@pw.torchbox.com "sudo -u pwman /usr/local/bin/launch_pwman \"$@\""
+}
+
+# Torchbox aliases
+alias tbxdokku='ssh -t dokku@staging.torchbox.com '
 alias tbxaws="aws --profile tbx "
 
 # Evaluate docker machine settings
@@ -29,7 +36,7 @@ function dme() {
 }
 
 # Custom PS1
-export PS1='\[\033[32m\]\W \[\033[34m\]\$ \[\033[0m\]'
+export PS1='\[\033[1;100m\]\W $\[\033[0m\] '
 
 # Vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox

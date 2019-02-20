@@ -27,5 +27,7 @@ urxvt*matcher.button: C1
 urxvt*keysym.Home:          \033[1~
 urxvt*keysym.End:           \033[4~
 
-urxvt*foreground: #000000
+!! Colours
+urxvt*foreground: white
+urxvt*background: black
 urxvt*colorUL: #4682B4

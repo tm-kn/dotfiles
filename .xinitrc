@@ -3,8 +3,10 @@
 # Start dbus and keyring
 dbus-update-activation-environment --systemd DISPLAY
 export $(dbus-launch)
-eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
-export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
+
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+
 
 # Allow Java programs run properly in GUI
 export _JAVA_AWT_WM_NONREPARENTING=1
@@ -29,8 +31,6 @@ nm-applet &
 # Start blueman applet
 blueman-applet &
 
-# Set the wallpaper
-
 # Launch Transmission
 #transmission-gtk --minimized &
 
@@ -44,7 +44,7 @@ clipmenud &
 mons -a &
 
 # Lock screen on DPMS/suspend etc.
-xss-lock -- lock.sh &
+xss-lock -- xset dpms force suspend && slock
 
 # Turn the bell sound off
 xset -b
@@ -65,6 +65,7 @@ keepassxc &
 evolution &
 
 # Launch Telegram
-telegram-desktop &
+telegram-desktop -startintray &
 
-exec ~/.suckless/dwm/dwm 2> ~/.dwm.log
+# Start DWM
+exec dwm 2> ~/.dwm.log
