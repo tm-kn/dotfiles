@@ -1,3 +1,4 @@
+filetype plugin indent on
 syntax on
 
 " Enable full colour support
@@ -5,8 +6,8 @@ if has('nvim')
     set termguicolors
 endif
 
-" Use light background
-set background=dark
+" Set light background
+set background=light
 
 " Encoding
 set encoding=utf-8
@@ -107,6 +108,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
+set smartindent
 set expandtab
 
 " Enable spellcheck in text files
@@ -168,6 +170,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'benjie/local-npm-bin.vim'
 Plug 'sbdchd/neoformat'
 Plug 'valloric/youcompleteme'
+Plug 'tpope/vim-sleuth'
 
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
@@ -176,10 +179,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/goyo.vim'
 Plug 'lervag/vimtex'
 Plug 'thinca/vim-fontzoom'
+Plug 'rhysd/vim-grammarous'
 
 call plug#end()
-
-filetype plugin indent on
 
 " NERDTree
 nnoremap <Leader>v :NERDTreeToggle<Enter>

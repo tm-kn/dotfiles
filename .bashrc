@@ -14,7 +14,13 @@ fi
 stty -ixon
 
 # Infinite history
-HISTSIZE= HISTFILESIZE=
+export HISTSIZE=
+export HISTFILESIZE=
+
+# Avoid duplicates
+export HISTCONTROL=ignoredups:erasedups
+
+shopt -s histappend
 
 # Aliases
 alias ls='ls --color=auto'

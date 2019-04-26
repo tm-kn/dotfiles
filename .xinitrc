@@ -7,8 +7,7 @@ export $(dbus-launch)
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-
-# Allow Java programs run properly in GUI
+# Allow Java programs to run properly in GUI
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Set keyboard layout

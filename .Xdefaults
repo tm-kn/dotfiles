@@ -28,6 +28,6 @@ urxvt*keysym.Home:          \033[1~
 urxvt*keysym.End:           \033[4~
 
 !! Colours
-urxvt*foreground: white
-urxvt*background: black
+!urxvt*foreground: black
+!urxvt*background: white
 urxvt*colorUL: #4682B4
