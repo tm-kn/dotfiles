@@ -1,14 +1,6 @@
 filetype plugin indent on
 syntax on
 
-" Enable full colour support
-if has('nvim')
-    set termguicolors
-endif
-
-" Set light background
-set background=light
-
 " Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -103,6 +95,9 @@ set undolevels=700
 " Location
 map <leader>lc :lclose<CR>
 
+" Refresh CtrlP and NERDTree
+map <leader>r :CtrlPClearCache<CR>:NERDTreeRefreshRoot<CR>
+
 " Tabs
 set tabstop=4
 set softtabstop=4
@@ -137,6 +132,12 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" always show signcolumns
+set signcolumn=yes
+
+" Better display for messages
+set cmdheight=2
+
 " Mappings in the command mode
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
@@ -159,7 +160,7 @@ set scrolloff=10
 " vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
@@ -169,7 +170,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'benjie/local-npm-bin.vim'
 Plug 'sbdchd/neoformat'
-Plug 'valloric/youcompleteme'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'tpope/vim-sleuth'
 
 Plug 'mileszs/ack.vim'
@@ -183,15 +184,21 @@ Plug 'rhysd/vim-grammarous'
 
 call plug#end()
 
+" colorscheme
+"
+set background=light
+colorscheme default
+
+
 " NERDTree
 nnoremap <Leader>v :NERDTreeToggle<Enter>
 nnoremap <Leader>vv :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1 " Close NERDTree when opening a file
 let NERDTreeAutoDeleteBuffer=1 " Close buffer if file has been delted with
-" NERDTree
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+
 
 " airline
 set laststatus=2
@@ -204,28 +211,37 @@ set wildignore+=*.pyc
 " Ctrl to ignore .gitignore
 let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f' ]
 
+
 " Neomake
-call neomake#configure#automake('nrwi', 500)
+"call neomake#configure#automake('nrwi', 500)
 let g:neomake_python_enabled_makers = ['flake8']
 let g:neomake_open_list = 2
 let g:neomake_javascript_enabled_makers = ['eslint']
 
+" Disable LaTeX checkers since vimtex is used to compile on the fly.
+let g:neomake_tex_enabled_makers = []
+
+
 " Ack/The Silver Searcher
-" Use The Sivler Searcher instead
+" Use The Silver Searcher instead Ack
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
+
 " Tagbar
 map <Leader>t :TagbarToggle<CR>
+
 
 " Indent guides
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 0
 
+
 " Goyo plugin makes text more readable when writing prose:
 map <F10> :Goyo<CR>
 inoremap <F10> <esc>:Goyo<CR>a
+
 
 " vimtex plugin
 let g:vimtex_mappings_enabled = 1

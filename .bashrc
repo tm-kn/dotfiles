@@ -34,6 +34,7 @@ tbxpw(){
 
 # Torchbox aliases
 alias tbxdokku='ssh -t dokku@staging.torchbox.com '
+alias ffdokku="ssh -t dokku@ff-apps.dh.bytemark.co.uk "
 alias tbxaws="aws --profile tbx "
 
 # Evaluate docker machine settings

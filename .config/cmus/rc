@@ -1,4 +1,3 @@
 set mouse=1
 set repeat=true
 set show_current_bitrate=true
-colorscheme xterm-white
