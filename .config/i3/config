@@ -163,42 +163,42 @@ exec i3-config-wizard
 # Keybinds
 
 # Lock
-bindsym $mod+shift+ctrl+l exec xset dpms force suspend
-bindsym XF86ScreenSaver exec xset dpms force suspend
+bindsym $mod+shift+ctrl+l exec --no-startup-id xset dpms force suspend
+bindsym XF86ScreenSaver exec --no-startup-id xset dpms force suspend
 
 exec --no-startup-id xss-lock -l -- lock.sh --nofork
 
 # Screenshot
-bindsym Print exec screenshot.sh
-bindsym Ctrl+Print exec screenshot.sh --clipboard
-bindsym $altmod+Print exec screenshot.sh --window
-bindsym Ctrl+$altmod+Print exec screenshot.sh --window --clipboard
-bindsym shift+Print exec "sleep 1; screenshot.sh --area"
-bindsym Ctrl+shift+Print exec "sleep 1; exec screenshot.sh --area --clipboard"
+bindsym Print exec --no-startup-id screenshot.sh
+bindsym Ctrl+Print exec --no-startup-id screenshot.sh --clipboard
+bindsym $altmod+Print exec --no-startup-id screenshot.sh --window
+bindsym Ctrl+$altmod+Print exec --no-startup-id screenshot.sh --window --clipboard
+bindsym shift+Print exec --no-startup-id "sleep 1; screenshot.sh --area"
+bindsym Ctrl+shift+Print exec --no-startup-id "sleep 1; exec screenshot.sh --area --clipboard"
 
 
 # Programs
 bindsym $mod+shift+f exec firefox
-bindsym $mod+shift+s exec slack
-bindsym $mod+shift+a exec telegram-desktop
+bindsym $mod+shift+s exec --no-startup-id slack
+bindsym $mod+shift+a exec --no-startup-id telegram-desktop
 
 # XF86
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +6%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86Display exec mons -n right
-bindsym XF86Tools exec pavucontrol
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +6%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86Display exec --no-startup-id mons -n right
+bindsym XF86Tools exec --no-startup-id pavucontrol
 
 # Power button
 exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity
-bindsym XF86PowerOff exec systemctl suspend
+bindsym XF86PowerOff exec --no-startup-id systemctl suspend
 
 # Clipman
 bindsym $mod+c exec clipmenu -i
-bindsym ctrl+$altmod+c exec "clipdel -d *"
+bindsym ctrl+$altmod+c exec --no-startup-id "clipdel -d *"
 
 # Cmus
 set $music_play "cmus-remote --pause"
@@ -207,12 +207,12 @@ set $music_prev "cmus-remote --prev"
 
 bindsym $mod+shift+m exec $term -e "tmux new-session -A -s cmus cmus"
 
-bindsym $mod+apostrophe exec $music_play
-bindsym XF86AudioPlay exec $music_play
-bindsym $mod+numbersign exec $music_next
-bindsym XF86AudioNext exec $music_next
-bindsym $mod+semicolon exec $music_prev
-bindsym XF86AudioPrev exec $music_prev
+bindsym $mod+apostrophe exec --no-startup-id $music_play
+bindsym XF86AudioPlay exec --no-startup-id $music_play
+bindsym $mod+numbersign exec --no-startup-id $music_next
+bindsym XF86AudioNext exec --no-startup-id $music_next
+bindsym $mod+semicolon exec --no-startup-id $music_prev
+bindsym XF86AudioPrev exec --no-startup-id $music_prev
 
 # Disable Screen blanking
 exec --no-startup-id xset dpms 0 0 0
