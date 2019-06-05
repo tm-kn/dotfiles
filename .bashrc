@@ -29,7 +29,7 @@ alias grep='grep --color=auto'
 
 # pwman
 tbxpw(){
-    ssh -t tomaszk@pw.torchbox.com "sudo -u pwman /usr/local/bin/launch_pwman \"$@\""
+    TERM=xterm ssh -t tomaszk@pw.torchbox.com "sudo -u pwman /usr/local/bin/launch_pwman \"$@\""
 }
 
 # Torchbox aliases
