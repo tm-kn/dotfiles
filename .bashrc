@@ -44,3 +44,11 @@ function dme() {
 
 # Vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
+
+# NVM
+NVM_PATH=/usr/share/nvm/init-nvm.sh
+if [ -f $NVM_PATH ]; then
+    source $NVM_PATH
+else
+    echo "Warning: nvm not found at $NVM_PATH"
+fi
