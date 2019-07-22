@@ -118,6 +118,9 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Javascript tabs
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
 
+" Set filetype for TSX files
+autocmd BufNewFile,BufRead *.tsx setfiletype typescript.jsx
+
 " Make search case insensitive
 set hlsearch
 set incsearch
