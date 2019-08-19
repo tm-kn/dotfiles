@@ -174,7 +174,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'benjie/local-npm-bin.vim'
 Plug 'sbdchd/neoformat'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-Plug 'tpope/vim-sleuth'
+Plug 'editorconfig/editorconfig-vim'
 
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
