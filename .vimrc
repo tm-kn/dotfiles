@@ -138,6 +138,9 @@ set noswapfile
 " always show signcolumns
 set signcolumn=yes
 
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
 " Better display for messages
 set cmdheight=2
 
@@ -186,6 +189,15 @@ Plug 'thinca/vim-fontzoom'
 Plug 'rhysd/vim-grammarous'
 Plug 'danielwe/base16-vim'
 
+"CoC extensions
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+
+
 call plug#end()
 
 " colorscheme
@@ -205,13 +217,28 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 
+" CoC
+set updatetime=400
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Open commands list
+nmap <leader>c :<C-u>CocList commands<cr>
+
+
 " airline
 set laststatus=2
+"let g:airline_extensions = ['branch', 'hunks', 'coc']
+let g:airline_skip_empty_sections = 1
+let g:NERDTreeStatusline = ''
 
 
 " Ctrlp
 let g:ctrlp_max_height=30
 set wildignore+=*.pyc
+
 
 " Ctrl to ignore .gitignore
 let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f' ]
@@ -250,3 +277,23 @@ inoremap <F10> <esc>:Goyo<CR>a
 
 " vimtex plugin
 let g:vimtex_mappings_enabled = 1
+
+
+" CoC plugin
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
