@@ -173,9 +173,9 @@ exec --no-startup-id xss-lock -l -- lock.sh --nofork
 # Screenshot
 set $screenshots_directory ~/Pictures/screenshots/
 exec --no-startup-id mkdir -p $screenshots_directory
-bindsym Print exec --no-startup-id flameshot full --path $screenshots_directory --delay 1000
-bindsym Ctrl+Print exec --no-startup-id flameshot full --clipboard --delay 1000
-bindsym shift+Print exec --no-startup-id "flameshot gui"
+bindsym Print exec --no-startup-id flameshot full --path $screenshots_directory
+bindsym Ctrl+Print exec --no-startup-id flameshot full --clipboard
+bindsym shift+Print exec --no-startup-id "flameshot gui --path $screenshots_directory"
 
 
 # Programs
@@ -219,6 +219,9 @@ exec --no-startup-id xset dpms 0 0 0
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s 0 0
 exec --no-startup-id xset s off
+
+# Start notifications
+exec --no-startup-id dunst
 
 # Disable alert sound
 exec --no-startup-id xset -b
