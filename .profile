@@ -5,7 +5,7 @@ fi
 export PATH=$PATH:$HOME/bin
 export EDITOR=vim
 export VISUAL=$EDITOR
-export BROWSER=firefox
+export BROWSER=google-chrome-stable
 
 export JAVA_HOME=/usr/lib/jvm/default
 

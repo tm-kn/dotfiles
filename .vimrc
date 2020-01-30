@@ -187,7 +187,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'lervag/vimtex'
 Plug 'thinca/vim-fontzoom'
 Plug 'rhysd/vim-grammarous'
-Plug 'danielwe/base16-vim'
 
 "CoC extensions
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
@@ -202,9 +201,7 @@ call plug#end()
 
 " colorscheme
 "
-let base16colorspace=256
 set background=light
-colorscheme base16-google-light
 
 
 " NERDTree

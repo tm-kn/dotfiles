@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 # Start dbus and keyring
 dbus-update-activation-environment --systemd DISPLAY

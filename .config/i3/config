@@ -180,7 +180,7 @@ bindsym Ctrl+shift+Print exec --no-startup-id "sleep 1; exec screenshot.sh --are
 
 
 # Programs
-bindsym $mod+shift+f exec firefox
+bindsym $mod+shift+f exec google-chrome-stable
 bindsym $mod+shift+s exec --no-startup-id slack
 bindsym $mod+shift+a exec --no-startup-id telegram-desktop
 bindsym $mod+shift+d exec --no-startup-id signal-desktop --use-tray-icon
@@ -201,7 +201,7 @@ bindsym XF86PowerOff exec --no-startup-id systemctl suspend
 
 # Clipman
 bindsym $mod+c exec clipmenu -i
-bindsym ctrl+$altmod+c exec --no-startup-id "clipdel -d *"
+bindsym ctrl+$altmod+c exec --no-startup-id "clipdel -d .*"
 
 # Cmus
 set $music_play "cmus-remote --pause"
@@ -232,7 +232,7 @@ exec --no-startup-id telegram-desktop
 exec --no-startup-id nextcloud > /dev/null 2>&1
 exec --no-startup-id riot-desktop --hidden
 exec --no-startup-id signal-desktop --use-tray-icon --start-in-tray
-exec --no-startup-id udiskie --tray --appindicator
+exec --no-startup-id udiskie --tray
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id start-pulseaudio-x11
