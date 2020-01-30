@@ -171,19 +171,16 @@ bindsym XF86ScreenSaver exec --no-startup-id xset dpms force suspend
 exec --no-startup-id xss-lock -l -- lock.sh --nofork
 
 # Screenshot
-bindsym Print exec --no-startup-id screenshot.sh
-bindsym Ctrl+Print exec --no-startup-id screenshot.sh --clipboard
-bindsym $altmod+Print exec --no-startup-id screenshot.sh --window
-bindsym Ctrl+$altmod+Print exec --no-startup-id screenshot.sh --window --clipboard
-bindsym shift+Print exec --no-startup-id "sleep 1; screenshot.sh --area"
-bindsym Ctrl+shift+Print exec --no-startup-id "sleep 1; exec screenshot.sh --area --clipboard"
+set $screenshots_directory ~/Pictures/screenshots/
+exec --no-startup-id mkdir -p $screenshots_directory
+bindsym Print exec --no-startup-id flameshot full --path $screenshots_directory --delay 1000
+bindsym Ctrl+Print exec --no-startup-id flameshot full --clipboard --delay 1000
+bindsym shift+Print exec --no-startup-id "flameshot gui"
 
 
 # Programs
 bindsym $mod+shift+f exec google-chrome-stable
 bindsym $mod+shift+s exec --no-startup-id slack
-bindsym $mod+shift+a exec --no-startup-id telegram-desktop
-bindsym $mod+shift+d exec --no-startup-id signal-desktop --use-tray-icon
 
 # XF86
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +6%
@@ -199,16 +196,16 @@ bindsym XF86Tools exec --no-startup-id pavucontrol
 exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity
 bindsym XF86PowerOff exec --no-startup-id systemctl suspend
 
-# Clipman
+# Clipmenu
 bindsym $mod+c exec clipmenu -i
 bindsym ctrl+$altmod+c exec --no-startup-id "clipdel -d .*"
 
-# Cmus
-set $music_play "cmus-remote --pause"
-set $music_next "cmus-remote --next"
-set $music_prev "cmus-remote --prev"
+# Music
+set $music_play "playerctl play-pause"
+set $music_next "playerctl next"
+set $music_prev "playerctl previous"
 
-bindsym $mod+shift+m exec $term -e "tmux new-session -A -s cmus cmus"
+bindsym $mod+shift+m exec $term -e "spotify"
 
 bindsym $mod+apostrophe exec --no-startup-id $music_play
 bindsym XF86AudioPlay exec --no-startup-id $music_play
@@ -228,10 +225,6 @@ exec --no-startup-id xset -b
 
 # Startup
 exec --no-startup-id clipmenud
-exec --no-startup-id telegram-desktop
-exec --no-startup-id nextcloud > /dev/null 2>&1
-exec --no-startup-id riot-desktop --hidden
-exec --no-startup-id signal-desktop --use-tray-icon --start-in-tray
 exec --no-startup-id udiskie --tray
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
