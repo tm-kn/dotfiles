@@ -175,7 +175,7 @@ set $screenshots_directory ~/Pictures/screenshots/
 exec --no-startup-id mkdir -p $screenshots_directory
 bindsym Print exec --no-startup-id flameshot full --path $screenshots_directory
 bindsym Ctrl+Print exec --no-startup-id flameshot full --clipboard
-bindsym shift+Print exec --no-startup-id "flameshot gui --path $screenshots_directory"
+bindsym shift+Print exec --no-startup-id flameshot gui --path $screenshots_directory
 
 
 # Programs
