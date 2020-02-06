@@ -7,8 +7,8 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
-        interval = 1
+    colors = true
+    interval = 1
 }
 
 order += "volume master"
@@ -19,30 +19,30 @@ order += "load"
 order += "tztime local"
 
 volume master {
-        format = "♪: %volume"
-        format_muted = "♪: muted (%volume)"
-        device = "pulse"
+    format = "♪: %volume"
+    format_muted = "♪: muted (%volume)"
+    device = "pulse"
 }
 
 wireless _first_ {
-        format_up = "W: (%quality at %essid) %ip"
-        format_down = "W: down"
+    format_up = "W: (%quality at %essid) %ip"
+    format_down = "W: down"
 }
 
 ethernet _first_ {
-        # if you use %speed, i3status requires root privileges
-        format_up = "E: %ip (%speed)"
-        format_down = "E: down"
+    # if you use %speed, i3status requires root privileges
+    format_up = "E: %ip (%speed)"
+    format_down = "E: down"
 }
 
 battery all {
-        format = "%status %percentage %remaining"
+    format = "%status %percentage %remaining"
 }
 
 tztime local {
-        format = "%a %d %b %Y %H:%M:%S"
+    format = "%a %d %b %Y %H:%M:%S"
 }
 
 load {
-        format = "CPU: %1min"
+    format = "CPU: %1min"
 }
