@@ -25,10 +25,16 @@ plugins=(
     nvm
 )
 
+# History
 HISTSIZE=100000
 SAVEHIST=$HISTSIZ
 
+# Vagrant aliases
+alias vs="vagrant ssh"
+alias vu="vagrant up --no-provision"
+alias vp="vagrant provision"
 
+# ZSH plugins
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
