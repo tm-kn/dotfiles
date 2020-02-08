@@ -8,8 +8,6 @@ ZSH_THEME=wedisagree
 
 KEYTIMEOUT=1
 
-export NVM_DIR="/usr/share/nvm"
-
 plugins=(
     git
     colored-man-pages
@@ -31,8 +29,9 @@ SAVEHIST=$HISTSIZ
 
 # Vagrant aliases
 alias vs="vagrant ssh"
-alias vu="vagrant up --no-provision"
+alias vup="vagrant up"
 alias vp="vagrant provision"
+alias vh="vagrant halt"
 
 # ZSH plugins
 source $ZSH/oh-my-zsh.sh
