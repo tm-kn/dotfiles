@@ -42,8 +42,6 @@ function dme() {
     eval $(docker-machine env)
 }
 
-# Vagrant
-export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
 # NVM
 NVM_PATH=/usr/share/nvm/init-nvm.sh
