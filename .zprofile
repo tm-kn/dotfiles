@@ -4,7 +4,7 @@ export PATH=$PATH:$HOME/bin
 # Utilities
 export EDITOR=vim
 export VISUAL=$EDITOR
-export BROWSER=google-chrome-stable
+export BROWSER=firefox
 
 # Vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
@@ -18,7 +18,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 if [ $XDG_VTNR -eq 1 ] && [ ! $DISPLAY ]; then
     # Start x and set the keyboard speed
     while true; do
-        read -p "Do you wish to start X? [Y/n]" yn
+        read -rs -k 1 "yn?Do you wish to start X? [Y/n]"
+
         case $yn in
             [Yy]|'') startx -- -ardelay 200 -arinterval 10; exit; break;;
             [Nn]) break;;

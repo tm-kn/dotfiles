@@ -184,7 +184,7 @@ bindsym shift+Print exec --no-startup-id flameshot gui --path $screenshots_direc
 
 
 # Programs
-bindsym $mod+shift+f exec google-chrome-stable
+bindsym $mod+shift+f exec $BROWSER
 bindsym $mod+shift+s exec --no-startup-id slack
 
 # XF86
