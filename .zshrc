@@ -44,12 +44,6 @@ export VAGRANT_DEFAULT_PROVIDER=virtualbox
 HISTSIZE=100000
 SAVEHIST=$HISTSIZ
 
-# Vagrant aliases
-alias vs="vagrant ssh"
-alias vup="vagrant up"
-alias vp="vagrant provision"
-alias vh="vagrant halt"
-
 # ZSH plugins
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --keep-zshrc
 source ~/.oh-my-zsh/oh-my-zsh.sh
