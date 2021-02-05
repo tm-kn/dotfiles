@@ -166,6 +166,7 @@ Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
 Plug 'lervag/vimtex'
 Plug 'thinca/vim-fontzoom'
+Plug 'brooth/far.vim'
 
 call plug#end()
 
@@ -198,7 +199,10 @@ colorscheme default
 
 " FZF - Fuzzy finder
 map <C-p> :GFiles<cr>
-map <C-s> :GFiles?<cr>
+map <C-s> :Buffers<cr>
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
 
 
 " NERDTree
