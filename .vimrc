@@ -94,9 +94,6 @@ set undolevels=700
 " Location
 map <leader>lc :lclose<CR>
 
-" Refresh CtrlP and NERDTree
-map <leader>r :CtrlPClearCache<CR>:NERDTreeRefreshRoot<CR>
-
 " Tabs
 set tabstop=4
 set softtabstop=4
@@ -122,6 +119,9 @@ set smartcase
 
 " Disable search highlight
 map <Leader>h :nohl<CR>
+
+" TextEdit might fail if hidden is not set.
+set hidden
 
 " Disable backup and swap files
 set nobackup
@@ -156,15 +156,15 @@ set scrolloff=10
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdcommenter'
 Plug 'benjie/local-npm-bin.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'editorconfig/editorconfig-vim'
-
-Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
 Plug 'lervag/vimtex'
@@ -177,7 +177,7 @@ call plug#end()
 let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ 'coc-tslint-plugin',
-    \ 'coc-python',
+    \ 'coc-pyright',
     \ 'coc-json',
     \ 'coc-html',
     \ 'coc-yaml',
@@ -195,9 +195,13 @@ let g:coc_global_extensions = [
 \]
 
 " colorscheme
-"
 set background=light
 colorscheme default
+
+
+" FZF - Fuzzy finder
+map <C-p> :GFiles<cr>
+map <C-s> :GFiles?<cr>
 
 
 " NERDTree
@@ -208,6 +212,7 @@ let NERDTreeAutoDeleteBuffer=1 " Close buffer if file has been delted with
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+let g:NERDTreeWinSize=60
 
 
 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -222,35 +227,9 @@ nmap <leader>c :<C-u>CocList commands<cr>
 
 " airline
 set laststatus=2
-"let g:airline_extensions = ['branch', 'hunks', 'coc']
+let g:airline_extensions = ['branch', 'hunks', 'coc']
 let g:airline_skip_empty_sections = 1
 let g:NERDTreeStatusline = ''
-
-
-" Ctrlp
-let g:ctrlp_max_height=30
-set wildignore+=*.pyc
-
-
-" Ctrl to ignore .gitignore
-let g:ctrlp_user_command = [ '.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f' ]
-
-
-" Neomake
-"call neomake#configure#automake('nrwi', 500)
-let g:neomake_python_enabled_makers = ['flake8']
-let g:neomake_open_list = 2
-let g:neomake_javascript_enabled_makers = ['eslint']
-
-" Disable LaTeX checkers since vimtex is used to compile on the fly.
-let g:neomake_tex_enabled_makers = []
-
-
-" Ack/The Silver Searcher
-" Use The Silver Searcher instead Ack
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
 
 
 " Tagbar
@@ -259,6 +238,7 @@ map <Leader>t :TagbarToggle<CR>
 
 " vimtex plugin
 let g:vimtex_mappings_enabled = 1
+let g:tex_flavor = 'latex'
 
 
 " CoC plugin
@@ -276,13 +256,16 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -300,8 +283,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
@@ -332,11 +317,26 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Create mappings for function text object, requires document symbols feature of languageserver.
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
 omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 " Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
 nmap <silent> <TAB> <Plug>(coc-range-select)
@@ -371,3 +371,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" Escape to close the floating windows - really annoying.
+nmap <Esc> :call coc#float#close_all() <CR>
