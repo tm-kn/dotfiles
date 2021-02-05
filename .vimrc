@@ -91,9 +91,6 @@ set colorcolumn=80
 set history=700
 set undolevels=700
 
-" Location
-map <leader>lc :lclose<CR>
-
 " Tabs
 set tabstop=4
 set softtabstop=4
