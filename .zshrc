@@ -40,6 +40,11 @@ alias vi=$EDITOR
 # Vagrant to use Virtualbox
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
+# Evaluate docker machine settings
+function dme() {
+    eval $(docker-machine env)
+}
+
 # History
 HISTSIZE=100000
 SAVEHIST=$HISTSIZ

@@ -42,13 +42,13 @@ browser = xdg-open
 [colors]
 
 # special
-foreground      = #515253
-foreground_bold = #515253
-cursor          = #515253
+foreground      = #000000
+foreground_bold = #000000
+cursor          = #000000
 background      = #fcfdfe
 
 # black
-color0  = #0c0d0e
+color0  = #000
 color8  = #737475
 
 # red

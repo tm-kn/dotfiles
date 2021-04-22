@@ -1,5 +1,4 @@
-font pango:Noto Emoji 8
-font pango:Noto Sans Mono 8
+font pango: Noto Emoji 10, Noto Sans Display Regular 9
 
 set $mod Mod4
 set $altmod Mod1
@@ -13,6 +12,9 @@ set $right l
 
 set $term termite
 
+
+focus_on_window_activation focus
+
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -24,7 +26,7 @@ bindsym $mod+shift+Return exec $term
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -nf '#BBBBBB' -nb '#000000' -sb '#5F5F5F' -sf '#EEEEEE'
 
 # change focus
 bindsym $mod+$left focus left
@@ -143,18 +145,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    # Disable scrolling on workspaces
-    bindsym button4 nop
-    bindsym button5 nop
-    bindsym button6 nop
-    bindsym button7 nop
-    position top
-    status_command i3status
-}
-
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
 # keysym-based config which used their favorite modifier (alt or windows)
@@ -186,16 +176,17 @@ bindsym shift+Print exec --no-startup-id flameshot gui --path $screenshots_direc
 # Programs
 bindsym $mod+shift+f exec $BROWSER
 bindsym $mod+shift+s exec --no-startup-id slack
+bindsym $mod+shift+d exec --no-startup-id signal-desktop --use-tray-icon
+bindsym $mod+shift+t exec --no-startup-id telegram-desktop
 
 # XF86
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5
+bindsym XF86AudioMute exec --no-startup-id pamixer --toggle-mute
+bindsym XF86AudioMicMute exec --no-startup-id pamixer --default-source --toggle-mute
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86Display exec --no-startup-id mons -n right
-bindsym XF86Tools exec --no-startup-id pavucontrol
 
 # Power button
 exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity
@@ -209,6 +200,8 @@ bindsym ctrl+$altmod+c exec --no-startup-id "clipdel -d .*"
 set $music_play "playerctl play-pause"
 set $music_next "playerctl next"
 set $music_prev "playerctl previous"
+
+bindsym $mod+shift+a exec --no-startup-id pavucontrol
 
 bindsym $mod+shift+m exec spotify
 
@@ -232,9 +225,50 @@ exec --no-startup-id dunst
 exec --no-startup-id xset -b
 
 # Startup
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+exec --no-startup-id redshift-gtk
 exec --no-startup-id clipmenud
 exec --no-startup-id udiskie --tray
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id mons -a
+exec --no-startup-id signal-desktop --use-tray-icon --start-in-tray
+exec --no-startup-id element-desktop --hidden
+exec --no-startup-id telegram-desktop -startintray
+exec --no-startup-id dropbox
+exec --no-startup-id slack -u
+
+
+# class                 border  bground text    indicator child_border
+client.focused          #000000 #FFFFFF #000000 #000000   #000000
+client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
+client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+
+client.background       #000000
+
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    # Disable scrolling on workspaces
+    bindsym button4 nop
+    bindsym button5 nop
+    bindsym button6 nop
+    bindsym button7 nop
+    position bottom
+    status_command i3status
+    colors {
+        background #000000
+        statusline #FFFFFF
+        separator  #666666
+
+        focused_workspace  #FFFFFF #FFFFFF #000000
+        active_workspace   #000000 #000000 #FFFFFF
+        inactive_workspace #000000 #000000 #FFFFFF
+        urgent_workspace   #2F343A #900000 #FFFFFF
+        binding_mode       #2F343A #900000 #FFFFFF
+    }
+}

@@ -9,6 +9,9 @@
 general {
     colors = true
     interval = 1
+    color_good = "#FFFFFF"
+    color_degraded = "#FFFA6E"
+    color_bad = "#FF0000"
 }
 
 order += "volume master"
@@ -46,3 +49,5 @@ tztime local {
 load {
     format = "CPU: %1min"
 }
+
+
