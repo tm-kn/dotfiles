@@ -167,6 +167,7 @@ Plug 'majutsushi/tagbar'
 Plug 'lervag/vimtex'
 Plug 'thinca/vim-fontzoom'
 Plug 'brooth/far.vim'
+Plug 'nightsense/seabird'
 
 call plug#end()
 
@@ -194,7 +195,7 @@ let g:coc_global_extensions = [
 
 " colorscheme
 set background=light
-colorscheme default
+colorscheme greygull
 
 
 " FZF - Fuzzy finder

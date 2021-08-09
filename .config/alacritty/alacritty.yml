@@ -2,7 +2,34 @@ font:
   size: 8
   normal:
     family: Noto Sans Mono
-colors:
-  primary:
-    background: '#fcfdfe'
-    foreground: '#000000'
+schemes:
+  greygull: &greygull
+    # Default colors
+    primary:
+      background: '0xffffff'
+      foreground: '0x6d767d'
+    # Colors the cursor will use if `custom_cursor_colors` is true
+    cursor:
+      text: '0xffffff'
+      cursor: '0x6d767d'
+    # Normal colors
+    normal:
+      black:   '0x1d252b'
+      red:     '0xe3717d'
+      green:   '0x43a838'
+      yellow:  '0xb0913a'
+      blue:    '0x469bd4'
+      magenta: '0xd6769e'
+      cyan:    '0x37a2a6'
+      white:   '0xe6eaed'
+    # Bright colors
+    bright:
+      black:   '0x0b141a'
+      red:     '0xd67e47'
+      green:   '0x61707a'
+      yellow:  '0x6d767d'
+      blue:    '0x787e82'
+      magenta: '0xa980e8'
+      cyan:    '0x808487'
+      white:   '0xffffff'
+colors: *greygull
