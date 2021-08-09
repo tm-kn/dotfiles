@@ -10,7 +10,7 @@ set $down j
 set $up k
 set $right l
 
-set $term termite
+set $term alacritty
 
 
 focus_on_window_activation focus
@@ -176,7 +176,6 @@ bindsym shift+Print exec --no-startup-id flameshot gui --path $screenshots_direc
 # Programs
 bindsym $mod+shift+f exec $BROWSER
 bindsym $mod+shift+s exec --no-startup-id slack
-bindsym $mod+shift+d exec --no-startup-id signal-desktop --use-tray-icon
 bindsym $mod+shift+t exec --no-startup-id telegram-desktop
 
 # XF86
@@ -233,9 +232,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id mons -a
-exec --no-startup-id signal-desktop --use-tray-icon --start-in-tray
-exec --no-startup-id element-desktop --hidden
 exec --no-startup-id telegram-desktop -startintray
+exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id dropbox
 exec --no-startup-id slack -u
 

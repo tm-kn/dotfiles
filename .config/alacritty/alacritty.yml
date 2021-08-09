@@ -1,0 +1,8 @@
+font:
+  size: 8
+  normal:
+    family: Noto Sans Mono
+colors:
+  primary:
+    background: '#fcfdfe'
+    foreground: '#000000'
