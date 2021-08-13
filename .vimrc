@@ -167,7 +167,7 @@ Plug 'majutsushi/tagbar'
 Plug 'lervag/vimtex'
 Plug 'thinca/vim-fontzoom'
 Plug 'brooth/far.vim'
-Plug 'nightsense/seabird'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -193,9 +193,11 @@ let g:coc_global_extensions = [
     \ 'coc-vimtex',
 \]
 
+
 " colorscheme
+let base16colorspace=256  " Access colors present in 256 colorspace
 set background=light
-colorscheme greygull
+colorscheme base16-google-light
 
 
 " FZF - Fuzzy finder
