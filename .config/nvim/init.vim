@@ -150,7 +150,7 @@ set guioptions-=m
 set scrolloff=10
 
 " vim-plug
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
