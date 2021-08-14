@@ -12,7 +12,6 @@ set $right l
 
 set $term alacritty
 
-
 focus_on_window_activation focus
 
 # use Mouse+$mod to drag floating windows to their wanted position
@@ -117,12 +116,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit Sway? This will end your Sway session.' -B 'Yes, exit Sway' 'swaymsg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -145,32 +140,29 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#######################################################################
-# automatically start i3-config-wizard to offer the user to create a
-# keysym-based config which used their favorite modifier (alt or windows)
-#
-# i3-config-wizard will not launch if there already is a config file
-# in ~/.i3/config.
-#
-# Please remove the following exec line:
-#######################################################################
-exec i3-config-wizard
-
-
 # Keybinds
 
 # Lock
-bindsym $mod+shift+ctrl+l exec --no-startup-id xset dpms force suspend
-bindsym XF86ScreenSaver exec --no-startup-id xset dpms force suspend
+bindsym $mod+shift+ctrl+l exec --no-startup-id swaylock
+bindsym --locked XF86ScreenSaver exec --no-startup-id systemctl suspend
 
-exec --no-startup-id xss-lock -l -- lock.sh --nofork
+exec swayidle -w \
+    timeout 10 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+    resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
+	timeout 20 'swaylock -f' \
+    timeout 25 'swaymsg "output * dpms off"'; \
+	resume 'swaymsg "output * dpms on"' \
+	before-sleep 'swaylock -f; playerctl -a pause'
 
 # Screenshot
-set $screenshots_directory ~/Pictures/screenshots/
-exec --no-startup-id mkdir -p $screenshots_directory
-bindsym Print exec --no-startup-id flameshot full --path $screenshots_directory
-bindsym Ctrl+Print exec --no-startup-id flameshot full --clipboard
-bindsym shift+Print exec --no-startup-id flameshot gui --path $screenshots_directory
+set $active_screen "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')"
+set $screenshots_directory "$(xdg-user-dir PICTURES)/Screenshots"
+set $screenshot_file_path $screenshots_directory/$(date +'%Y%m%d_%Hh%Mm%S')
+exec_always --no-startup-id mkdir -p $screenshots_directory
+bindsym --locked Print exec --no-startup-id grim -o $active_screen $screenshot_file_path
+bindsym Ctrl+Print exec --no-startup-id grim -o $active_screen - | wl-copy
+bindsym shift+Print exec --no-startup-id grim -g $(slurp) $screenshot_file_path
+bindsym Ctrl+shift+Print exec --no-startup-id grim -g "$(slurp)" - | wl-copy
 
 
 # Programs
@@ -179,21 +171,22 @@ bindsym $mod+shift+s exec --no-startup-id slack
 bindsym $mod+shift+t exec --no-startup-id telegram-desktop
 
 # XF86
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5
-bindsym XF86AudioMute exec --no-startup-id pamixer --toggle-mute
-bindsym XF86AudioMicMute exec --no-startup-id pamixer --default-source --toggle-mute
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86Display exec --no-startup-id mons -n right
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5
+bindsym --locked XF86AudioMute exec --no-startup-id pamixer --toggle-mute
+bindsym --locked XF86AudioMicMute exec --no-startup-id pamixer --default-source --toggle-mute
+bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 5
+bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 5
 
 # Power button
 exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity
 bindsym XF86PowerOff exec --no-startup-id systemctl suspend
 
-# Clipmenu
-bindsym $mod+c exec clipmenu -i
-bindsym ctrl+$altmod+c exec --no-startup-id "clipdel -d .*"
+# Clipman
+exec wl-paste -t text --watch clipman store
+# exec wl-paste -p -t text --watch clipman store -P
+bindsym $mod+c exec clipman pick -t dmenu
+bIndsym ctrl+$altmod+c exec --no-startup-id clipman clear --all
 
 # Music
 set $music_play "playerctl play-pause"
@@ -204,34 +197,30 @@ bindsym $mod+shift+a exec --no-startup-id pavucontrol
 
 bindsym $mod+shift+m exec spotify
 
-bindsym $mod+apostrophe exec --no-startup-id $music_play
-bindsym XF86AudioPlay exec --no-startup-id $music_play
-bindsym $mod+numbersign exec --no-startup-id $music_next
-bindsym XF86AudioNext exec --no-startup-id $music_next
-bindsym $mod+semicolon exec --no-startup-id $music_prev
-bindsym XF86AudioPrev exec --no-startup-id $music_prev
-
-# Disable Screen blanking
-exec --no-startup-id xset dpms 0 0 0
-exec --no-startup-id xset -dpms
-exec --no-startup-id xset s 0 0
-exec --no-startup-id xset s off
+bindsym --locked $mod+apostrophe exec --no-startup-id $music_play
+bindsym --locked XF86AudioPlay exec --no-startup-id $music_play
+bindsym --locked $mod+numbersign exec --no-startup-id $music_next
+bindsym --locked XF86AudioNext exec --no-startup-id $music_next
+bindsym --locked $mod+semicolon exec --no-startup-id $music_prev
+bindsym --locked XF86AudioPrev exec --no-startup-id $music_prev
 
 # Start notifications
-exec --no-startup-id dunst
+exec --no-startup-id mako
 
 # Disable alert sound
 exec --no-startup-id xset -b
 
+# Disable pasting with a middle button
+exec --no-startup-id xmousepasteblock
+
 # Startup
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id redshift-gtk
-exec --no-startup-id clipmenud
+exec --no-startup-id gammastep
+exec --no-startup-id gammastep-indicator
 exec --no-startup-id udiskie --tray
-exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet --indicator
 exec --no-startup-id blueman-applet
 exec --no-startup-id start-pulseaudio-x11
-exec --no-startup-id mons -a
 exec --no-startup-id telegram-desktop -startintray
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id dropbox
@@ -248,25 +237,28 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #000000
 
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-    # Disable scrolling on workspaces
-    bindsym button4 nop
-    bindsym button5 nop
-    bindsym button6 nop
-    bindsym button7 nop
-    position bottom
-    status_command i3status
-    colors {
-        background #000000
-        statusline #FFFFFF
-        separator  #666666
-
-        focused_workspace  #FFFFFF #FFFFFF #000000
-        active_workspace   #000000 #000000 #FFFFFF
-        inactive_workspace #000000 #000000 #FFFFFF
-        urgent_workspace   #2F343A #900000 #FFFFFF
-        binding_mode       #2F343A #900000 #FFFFFF
-    }
+    swaybar_command waybar
 }
+
+# Output settings
+output * background #000000 solid_color
+
+# Laptop screen
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+output $laptop scale 1
+
+
+# Keyboard settings
+input * {
+    xkb_model "pc104"
+    xkb_layout "gb,gb"
+    xkb_variant ",pl"
+    xkb_options "caps:escape_shifted_capslock,grp:alt_shift_toggle"
+    repeat_rate 100
+    repeat_delay 200
+}
+
+include /etc/sway/config.d/*
