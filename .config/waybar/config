@@ -20,8 +20,9 @@
 	},
 
 	"clock": {
-		"format": "{:%a %H:%M %d/%m}",
-		"tooltip": false
+		"format": "{:%d/%m %a %H:%M:%S}",
+		"tooltip": false,
+        "interval": 1
 	},
 	"pulseaudio": {
 		"format": "{icon} {volume:2}% {format_source}",
