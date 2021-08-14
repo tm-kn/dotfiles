@@ -18,9 +18,13 @@ export JAVA_HOME=/usr/lib/jvm/default
 # Allow Java programs to run properly in GUI
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-# Start GNOME Keyring daemon
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
+function startsway() {
+    export LIBSEAT_BACKEND=logind
+    export XDG_SESSION_DESKTOP=sway
+    export XDG_CURRENT_DESKTOP=sway
+
+    exec dbus-run-session sway
+}
 
 # Ask user if they want to start Sway
 if [ "$XDG_VTNR" = "1" ] && [ ! $DISPLAY ]; then
@@ -29,9 +33,13 @@ if [ "$XDG_VTNR" = "1" ] && [ ! $DISPLAY ]; then
         read -rs -k 1 "yn?Do you wish to start Sway? [Y/n]"
 
         case $yn in
-            [Yy]|'') sway; exit; break;;
+            [Yy]|'') startsway; exit; break;;
             [Nn]) break;;
             *) echo "Please answer y or n.";;
         esac
     done
 fi
+
+# Start GNOME Keyring daemon
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
