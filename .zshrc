@@ -25,14 +25,6 @@ plugins=(
     nvm
 )
 
-# Editor settings
-# Prefer "vimx" over "vim". "vimx" is only specific to Fedora. It is VIM with
-# X11 support.
-if [ -x "$(command -v vimx)" ]; then
-    export EDITOR=vimx
-else
-    export EDITOR=vim
-fi
 export VISUAL=$EDITOR
 alias vim=$EDITOR
 alias vi=$EDITOR

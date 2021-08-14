@@ -1,6 +1,0 @@
-{
-  "pyright.organizeimports.provider": "isort",
-  "python.linting.mypyEnabled": true,
-  "python.linting.flake8Enabled": true,
-  "python.formatting.provider": "black"
-}

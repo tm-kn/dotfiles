@@ -2,7 +2,7 @@
 export PATH=$PATH:$HOME/bin
 
 # Utilities
-export EDITOR=vim
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export BROWSER=firefox
 
