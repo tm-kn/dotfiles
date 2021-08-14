@@ -25,7 +25,7 @@ if [ -n "$DESKTOP_SESSION" ]; then
 fi
 
 
-if [ $XDG_VTNR -eq 1 ] && [ ! $DISPLAY ]; then
+if [ "$XDG_VTNR" = "1" ] && [ ! $DISPLAY ]; then
     # Start x and set the keyboard speed
     while true; do
         read -rs -k 1 "yn?Do you wish to start Sway? [Y/n]"
