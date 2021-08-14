@@ -18,13 +18,7 @@ export JAVA_HOME=/usr/lib/jvm/default
 # Allow Java programs to run properly in GUI
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-# Start GNOME Keyring daemon
-if [ -n "$DESKTOP_SESSION" ]; then
-    eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-    export SSH_AUTH_SOCK
-fi
-
-
+# Ask user if they want to start Sway
 if [ "$XDG_VTNR" = "1" ] && [ ! $DISPLAY ]; then
     # Start x and set the keyboard speed
     while true; do
@@ -37,3 +31,7 @@ if [ "$XDG_VTNR" = "1" ] && [ ! $DISPLAY ]; then
         esac
     done
 fi
+
+# Start GNOME Keyring daemon
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
