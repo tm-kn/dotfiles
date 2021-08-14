@@ -148,9 +148,6 @@ bindsym --locked XF86ScreenSaver exec --no-startup-id systemctl suspend
 
 exec swayidle -w \
     timeout 10 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
-    resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
-	timeout 20 'swaylock -f' \
-    timeout 25 'swaymsg "output * dpms off"'; \
 	resume 'swaymsg "output * dpms on"' \
 	before-sleep 'swaylock -f; playerctl -a pause'
 
