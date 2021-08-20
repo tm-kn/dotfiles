@@ -9,6 +9,9 @@ export EDITOR=nvim
 export VISUAL=$EDITOR
 export BROWSER=firefox
 
+# bemenu theme
+export BEMENU_OPTS="--nf '#BBBBBB' --nb '#000000' --sb '#5F5F5F' --sf '#EEEEEE' --tf '#FFFFFF' --ff '#ffffff' --hf '#000000' --hb '#ffffff'"
+
 # Vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
@@ -23,7 +26,7 @@ function startsway() {
     export XDG_SESSION_DESKTOP=sway
     export XDG_CURRENT_DESKTOP=sway
 
-    exec dbus-run-session sway
+    dbus-run-session sway
 }
 
 # Ask user if they want to start Sway
@@ -40,6 +43,3 @@ if [ "$XDG_VTNR" = "1" ] && [ ! $DISPLAY ]; then
     done
 fi
 
-# Start GNOME Keyring daemon
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK

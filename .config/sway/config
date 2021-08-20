@@ -24,8 +24,8 @@ bindsym $mod+shift+Return exec $term
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nf '#BBBBBB' -nb '#000000' -sb '#5F5F5F' -sf '#EEEEEE'
+# start bemenu (a program launcher)
+bindsym $mod+d exec bemenu-run
 
 # change focus
 bindsym $mod+$left focus left
@@ -172,8 +172,8 @@ bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pamixer --increase 5
 bindsym --locked XF86AudioLowerVolume exec --no-startup-id pamixer --decrease 5
 bindsym --locked XF86AudioMute exec --no-startup-id pamixer --toggle-mute
 bindsym --locked XF86AudioMicMute exec --no-startup-id pamixer --default-source --toggle-mute
-bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 5
-bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 5
+bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
+bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 10
 
 # Power button
 exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity
@@ -182,7 +182,7 @@ bindsym XF86PowerOff exec --no-startup-id systemctl suspend
 # Clipman
 exec wl-paste -t text --watch clipman store
 # exec wl-paste -p -t text --watch clipman store -P
-bindsym $mod+c exec clipman pick -t dmenu
+bindsym $mod+c exec clipman pick --tool bemenu
 bIndsym ctrl+$altmod+c exec --no-startup-id clipman clear --all
 
 # Music
@@ -259,3 +259,7 @@ input * {
 }
 
 include /etc/sway/config.d/*
+
+# Start GNOME keyring daemon
+exec eval $(gnome-keyring-daemon --start)
+exec export SSH_AUTH_SOCK

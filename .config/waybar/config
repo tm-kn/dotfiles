@@ -20,14 +20,16 @@
 	},
 
 	"clock": {
-		"format": "{:%d/%m %a %H:%M:%S}",
+		"format": " {:%a %d %b %H:%M:%S}",
 		"tooltip": false,
-        "interval": 1
+        "interval": 1,
+        "on-click": "xdg-open https://www.fastmail.com/calendar/",
+        "on-click-right": "xdg-open https://www.fastmail.com/calendar/"
 	},
 	"pulseaudio": {
 		"format": "{icon} {volume:2}% {format_source}",
-		"format-bluetooth": "{icon}  {volume}% {format_source}",
-		"format-muted": "MUTE {format_source}",
+		"format-bluetooth": "{icon}  {volume} %  {format_source}",
+		"format-muted": " 0% {format_source}",
 		"format-icons": {
 			"headphones": "",
 			"default": [
@@ -35,18 +37,19 @@
 				""
 			]
 		},
-		"format-source": "Mic ON",
+		"format-source": "",
+		"format-source-muted": "",
         "scroll-step": 0,
-		"format-source-muted": "Mic OFF",
-		"on-click-right": "pavucontrol"
+        "on-click": "pavucontrol",
+        "on-click-right": "pavucontrol"
 	},
 	"memory": {
 		"interval": 5,
-		"format": "Mem {}%"
+		"format": " {}%"
 	},
 	"cpu": {
 		"interval": 5,
-		"format": "CPU {usage:2}%"
+		"format": " {usage:2}%"
 	},
 	"battery": {
 		"states": {
@@ -64,8 +67,8 @@
 		]
 	},
     "sway/language": {
-        "format": "{}",
-        "max-length": 50,
+        "format": " {long} ",
+        "max-length": 60,
     },
 	"tray": {
 		"icon-size": 16
