@@ -203,6 +203,9 @@ bindsym --locked XF86AudioPrev exec --no-startup-id $music_prev
 
 # Start notifications
 exec --no-startup-id mako
+bindsym shift+Ctrl+comma exec makoctl dismiss
+bindsym shift+Ctrl+period exec makoctl menu bemenu -l 10 -p "Select an action"
+bindsym mod1+grave exec makoctl restore
 
 # Disable alert sound
 exec --no-startup-id xset -b
@@ -211,9 +214,6 @@ exec --no-startup-id xset -b
 exec --no-startup-id xmousepasteblock
 
 # Startup
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id gammastep
-exec --no-startup-id gammastep-indicator
 exec --no-startup-id udiskie --tray
 exec --no-startup-id nm-applet --indicator
 exec --no-startup-id blueman-applet
@@ -259,7 +259,4 @@ input * {
 }
 
 include /etc/sway/config.d/*
-
-# Start GNOME keyring daemon
-exec eval $(gnome-keyring-daemon --start)
-exec export SSH_AUTH_SOCK
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"

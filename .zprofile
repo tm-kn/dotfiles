@@ -43,3 +43,8 @@ if [ "$XDG_VTNR" = "1" ] && [ ! $DISPLAY ]; then
     done
 fi
 
+if [ ! $SSH_AUTH_SOCK ] && [ $DISPLAY ]; then
+    # Start GNOME keyring daemon
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
