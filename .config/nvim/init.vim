@@ -27,8 +27,8 @@ vnoremap <Del> "_d
 set splitbelow
 set splitright
 
-" Enable mouse
-set mouse=a
+" Disable mouse
+set mouse=
 
 " Bind <Leader> key
 let mapleader = ','
@@ -57,8 +57,8 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 " Spellcheck
 set spelllang=en_gb
 set spell
-map <Leader>s :set spell<CR>
-map <Leader>ss :set nospell<CR>
+map <Leader>s :setlocal spell<CR>
+map <Leader>ss :setlocal nospell<CR>
 
 " Allow moving to the previous/next line with arrows/H/L
 set whichwrap+=<,>,h,l,[,]
@@ -99,11 +99,9 @@ set shiftround
 set smartindent
 set expandtab
 
-" Enable spellcheck in text files
-autocmd FileType txt,rst,md,tex setlocal spell
-
-" Enable wrapping in tex
-autocmd FileType tex setlocal linebreak wrap
+" Textual files
+autocmd FileType markdown set conceallevel=2
+autocmd FileType tex,markdown setlocal linebreak wrap
 
 " Set filetype for TSX files
 autocmd BufNewFile,BufRead *.tsx setfiletype typescript.jsx
@@ -167,7 +165,7 @@ Plug 'majutsushi/tagbar'
 Plug 'lervag/vimtex'
 Plug 'thinca/vim-fontzoom'
 Plug 'brooth/far.vim'
-Plug 'chriskempson/base16-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -195,9 +193,8 @@ let g:coc_global_extensions = [
 
 
 " colorscheme
-let base16colorspace=256  " Access colors present in 256 colorspace
 set background=light
-colorscheme base16-google-light
+set termguicolors
 
 
 " FZF - Fuzzy finder
