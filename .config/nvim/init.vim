@@ -1,6 +1,9 @@
 filetype plugin indent on
 syntax on
 
+" save file on make
+set autowrite
+
 " Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -166,6 +169,7 @@ Plug 'lervag/vimtex'
 Plug 'thinca/vim-fontzoom'
 Plug 'brooth/far.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'buoto/gotests-vim'
 
 call plug#end()
 
@@ -200,6 +204,17 @@ set termguicolors
 " FZF - Fuzzy finder
 map <C-p> :GFiles<cr>
 map <C-s> :Buffers<cr>
+
+" Go syntax highlighting
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+
+" Auto formatting and importing
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1

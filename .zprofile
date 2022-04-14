@@ -1,5 +1,5 @@
 # Add local bin directory to PATH
-export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/bin:$HOME/go/bin
 
 # Alias startx to include keyboard speed settings.
 alias startx="startx -- -ardelay 200 -arinterval 10"
