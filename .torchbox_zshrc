@@ -1,10 +1,2 @@
-# pwman
-tbxpw(){
-    TERM=xterm ssh -t tomaszk@pw.torchbox.com "sudo -u pwman /usr/local/bin/launch_pwman \"$@\""
-}
-
-# Torchbox aliases
-alias tbxdokku='ssh -t dokku@staging.torchbox.com '
-alias ffdokku="ssh -t dokku@ff-apps.dh.bytemark.co.uk "
 alias tbxaws="aws --profile tbx "
 alias tbxsocks="ssh -C -D 1080 proxy@ssh-proxy.torchbox.com"
