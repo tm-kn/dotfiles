@@ -170,6 +170,7 @@ Plug 'thinca/vim-fontzoom'
 Plug 'brooth/far.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'buoto/gotests-vim'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
