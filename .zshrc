@@ -1,6 +1,5 @@
-if [ -f ~/.torchbox_zshrc ]; then
-    . ~/.torchbox_zshrc
-fi
+export PATH=$PATH:$HOME/bin:$HOME/go/bin
+
 
 ZSH_THEME=robbyrussell
 
@@ -25,6 +24,8 @@ plugins=(
     nvm
 )
 
+export BROWSER=firefox
+export EDITOR=nvim
 export VISUAL=$EDITOR
 alias vim=$EDITOR
 alias vi=$EDITOR
@@ -33,8 +34,15 @@ alias vi=$EDITOR
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
 # History
-HISTSIZE=100000
-SAVEHIST=$HISTSIZ
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+setopt INC_APPEND_HISTORY
+export HISTTIMEFORMAT="[%F %T %z (%Z)] "
+setopt EXTENDED_HISTORY
+
+if [ -f ~/.torchbox_zshrc ]; then
+    . ~/.torchbox_zshrc
+fi
 
 # ZSH plugins
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --keep-zshrc
