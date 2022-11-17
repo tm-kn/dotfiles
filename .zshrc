@@ -30,6 +30,9 @@ export VISUAL=$EDITOR
 alias vim=$EDITOR
 alias vi=$EDITOR
 
+# Good defaults for HD Pro Webcam C920
+alias setcam="v4l2-ctl -d 2 --set-ctrl=zoom_absolute=140 --set-ctrl=brightness=140"
+
 # Vagrant to use Virtualbox
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
